@@ -78,7 +78,19 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.05;
 }
 
+.intro-name .letter {
+  display: inline-block;
+  opacity: 0.16;
+  transition: opacity 0.5s ease;
+}
+
+.intro.letters-in .intro-name .letter { opacity: 1; }
+.intro.letters-in .intro-tagline { opacity: 1; }
+
 .intro-tagline {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  transition-delay: 0.5s;
   margin: 26px 0 0;
   font-size: 13px;
   letter-spacing: 0.06em;
