@@ -23,6 +23,88 @@ body {
   background: #ffffff;
 }
 
+body.intro-lock { overflow: hidden; height: 100vh; }
+
+/* ---------- Intro ---------- */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0c0c14;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.intro.intro-hide {
+  opacity: 0;
+  transform: translateY(-6%);
+  pointer-events: none;
+}
+
+.intro-bar {
+  position: absolute;
+  top: 28px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f2f2f2;
+}
+
+.intro-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro-name h2 {
+  margin: 0;
+  font-size: clamp(48px, 11vw, 128px);
+  font-weight: 700;
+  line-height: 1.02;
+}
+
+.intro-photo {
+  position: relative;
+  width: clamp(100px, 16vw, 190px);
+  height: clamp(70px, 11vw, 130px);
+  margin: 6px 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.intro-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.intro-photo img.active { opacity: 1; }
+
+.intro-tagline {
+  margin: 30px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9a9aa5;
+  text-align: center;
+  max-width: 460px;
+  padding: 0 20px;
+}
+
 a { color: inherit; text-decoration: none; }
 
 .nav {
