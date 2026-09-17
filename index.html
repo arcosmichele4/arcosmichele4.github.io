@@ -7,6 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,13 +19,6 @@
   </div>
   <div class="intro-name">
     <h2>Michele</h2>
-    <div class="intro-photo">
-      <img src="images/espacio-emocional/3.jpg" alt="" class="active">
-      <img src="images/madma/cover.jpg" alt="">
-      <img src="images/sol-sal/cover.jpg" alt="">
-      <img src="images/xoko/cover.jpg" alt="">
-      <img src="images/san-isidro/cover.jpg" alt="">
-    </div>
     <h2>Arcos</h2>
   </div>
   <p class="intro-tagline">Graphic designer &mdash; branding, visual identity &amp; packaging</p>
@@ -114,23 +108,14 @@
 
   document.body.classList.add('intro-lock');
 
-  var photos = intro.querySelectorAll('.intro-photo img');
-  var current = 0;
-  var cycle = setInterval(function () {
-    photos[current].classList.remove('active');
-    current = (current + 1) % photos.length;
-    photos[current].classList.add('active');
-  }, 550);
-
   function finish() {
-    clearInterval(cycle);
     intro.classList.add('intro-hide');
     document.body.classList.remove('intro-lock');
     sessionStorage.setItem('introShown', '1');
     setTimeout(function () { intro.remove(); }, 900);
   }
 
-  var introTimer = setTimeout(finish, 2600);
+  var introTimer = setTimeout(finish, 2000);
 
   intro.addEventListener('click', function () {
     clearTimeout(introTimer);
