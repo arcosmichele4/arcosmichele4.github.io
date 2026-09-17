@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
@@ -118,7 +118,7 @@
 
   document.body.classList.add('intro-lock');
 
-  var STAGGER = 45;
+  var STAGGER = 100;
   var words = [document.getElementById('introWord1'), document.getElementById('introWord2')];
   var letterCount = 0;
 
@@ -140,16 +140,16 @@
     });
   });
 
-  var revealTime = Math.max(words[0].getAttribute('data-word').length, words[1].getAttribute('data-word').length) * STAGGER + 500;
+  var revealTime = Math.max(words[0].getAttribute('data-word').length, words[1].getAttribute('data-word').length) * STAGGER + 700;
 
   function finish() {
     intro.classList.add('intro-hide');
     document.body.classList.remove('intro-lock');
     sessionStorage.setItem('introShown', '1');
-    setTimeout(function () { intro.remove(); }, 900);
+    setTimeout(function () { intro.remove(); }, 1600);
   }
 
-  var introTimer = setTimeout(finish, revealTime + 900);
+  var introTimer = setTimeout(finish, revealTime + 1400);
 
   intro.addEventListener('click', function () {
     clearTimeout(introTimer);
