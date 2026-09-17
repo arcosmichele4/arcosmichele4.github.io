@@ -1,43 +1,55 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAN ISIDRO 2025 - Michele Arcos Diez</title>
+<title>SAN ISIDRO 2025 - Michele Arcos</title>
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-links">
-    <a href="index.html">Hello!</a>
-    <a href="work.html" class="active">Work</a>
-    <a href="contact.html">Contact</a>
+<header class="site-header">
+  <a href="index.html" class="brand">Michele Arcos</a>
+  <nav>
+    <a href="index.html#work" class="active">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+  <span class="year" id="headerYear"></span>
+</header>
+
+<div class="wrap">
+  <a class="back-link" href="index.html#work">&larr; Back to work</a>
+
+  <div class="project-header">
+    <span class="section-tag">Poster design</span>
+    <h1>SAN ISIDRO 2025</h1>
+    <p>Poster design for the 2025 San Isidro Festival, blending Madrid&rsquo;s traditional heritage with the geometric and functional aesthetic of the Bauhaus.</p>
   </div>
-  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Michele Arcos Diez"></a>
-</nav>
 
-<a class="back-link" href="work.html">&larr; Back to work</a>
-
-<div class="project-header">
-  <h1>SAN ISIDRO 2025</h1>
-  <p>Poster design for the 2025 San Isidro Festival, blending Madrid&rsquo;s traditional heritage with the geometric and functional aesthetic of the Bauhaus.</p>
+  <div class="project-images">
+    <img src="images/san-isidro/cover.jpg" alt="San Isidro 2025">
+    <img src="images/san-isidro/1.png" alt="San Isidro 2025">
+    <img src="images/san-isidro/2.png" alt="San Isidro 2025">
+    <img src="images/san-isidro/3.png" alt="San Isidro 2025">
+    <img src="images/san-isidro/4.jpg" alt="San Isidro 2025">
+  </div>
 </div>
 
-<div class="project-images">
-  <img src="images/san-isidro/cover.jpg" alt="San Isidro 2025">
-  <img src="images/san-isidro/1.png" alt="San Isidro 2025">
-  <img src="images/san-isidro/2.png" alt="San Isidro 2025">
-  <img src="images/san-isidro/3.png" alt="San Isidro 2025">
-  <img src="images/san-isidro/4.jpg" alt="San Isidro 2025">
-</div>
-
-<footer>
-  &copy; Michele Arcos Diez
+<footer class="wrap">
+  <span id="footerYear"></span>
+  <span>Michele Arcos</span>
 </footer>
+
+<script>
+var year = new Date().getFullYear();
+document.getElementById('headerYear').textContent = '®' + year;
+document.getElementById('footerYear').textContent = year + ' ® Michele Arcos';
+</script>
 
 </body>
 </html>
