@@ -8,20 +8,12 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
 <div class="intro" id="intro">
-  <div class="intro-bar">
-    <span>Michele Arcos</span>
-    <span id="introYear"></span>
-  </div>
-  <div class="intro-name">
-    <h2 id="introWord1" data-word="Michele"></h2>
-    <h2 id="introWord2" data-word="Arcos"></h2>
-  </div>
-  <p class="intro-tagline">Graphic designer &mdash; branding, visual identity &amp; packaging</p>
+  <img class="intro-logo" id="introLogo" src="images/logo-mich.png" alt="Mich">
 </div>
 
 <header class="site-header">
@@ -105,7 +97,6 @@
 <script>
 (function () {
   var year = new Date().getFullYear();
-  document.getElementById('introYear').textContent = '©' + year;
   document.getElementById('headerYear').textContent = '®' + year;
   document.getElementById('footerYear').textContent = year + ' ® Michele Arcos';
 
@@ -118,43 +109,26 @@
 
   document.body.classList.add('intro-lock');
 
-  var STAGGER = 100;
-  var words = [document.getElementById('introWord1'), document.getElementById('introWord2')];
-  var letterCount = 0;
-
-  words.forEach(function (word) {
-    var text = word.getAttribute('data-word');
-    text.split('').forEach(function (ch, i) {
-      var span = document.createElement('span');
-      span.className = 'letter';
-      span.textContent = ch;
-      span.style.transitionDelay = (i * STAGGER) + 'ms';
-      word.appendChild(span);
-      letterCount++;
-    });
-  });
-
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      intro.classList.add('letters-in');
-    });
-  });
-
-  var revealTime = Math.max(words[0].getAttribute('data-word').length, words[1].getAttribute('data-word').length) * STAGGER + 700;
+  var HOLD_AFTER_LOGO = 5000;
+  var logo = document.getElementById('introLogo');
+  var introTimer;
+  var done = false;
 
   function finish() {
+    if (done) return;
+    done = true;
+    clearTimeout(introTimer);
     intro.classList.add('intro-hide');
     document.body.classList.remove('intro-lock');
     sessionStorage.setItem('introShown', '1');
     setTimeout(function () { intro.remove(); }, 1600);
   }
 
-  var introTimer = setTimeout(finish, revealTime + 1400);
-
-  intro.addEventListener('click', function () {
-    clearTimeout(introTimer);
-    finish();
+  logo.addEventListener('animationend', function () {
+    introTimer = setTimeout(finish, HOLD_AFTER_LOGO);
   });
+
+  intro.addEventListener('click', finish);
 })();
 </script>
 
