@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&display=swap">
-<link rel="stylesheet" href="css/style.css?v=31">
+<link rel="stylesheet" href="css/style.css?v=33">
 </head>
 <body>
 
@@ -130,7 +130,7 @@ document.getElementById('headerYear').textContent = new Date().getFullYear();
   var RANGE = 9, SLOTS = RANGE * 2 + 1;
   // side works sit next to each other (no overlap), shrinking and fading toward the edges
   var GAP_C = 0.055, GAP = 0.025;
-  var S = [1, 0.38], X = [0, 0], O = [1, 1, 0.92, 0.78, 0.6, 0.44, 0.3, 0.2, 0.1, 0];
+  var S = [1, 0.5], X = [0, 0], O = [1, 1, 0.92, 0.78, 0.6, 0.44, 0.3, 0.2, 0.1, 0];
   X[1] = 0.5 + GAP_C + S[1] / 2;
   for (var q = 2; q <= RANGE; q++) {
     S[q] = S[q - 1] * 0.79;

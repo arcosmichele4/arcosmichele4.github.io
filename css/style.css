@@ -141,7 +141,7 @@ a { color: inherit; text-decoration: none; }
 /* ---------- Carousel (3D scale) ---------- */
 
 .carousel {
-  --cw: clamp(280px, min(38vw, 48vh), 580px);
+  --cw: clamp(280px, min(58vw, 64vh), 800px);
   --top: 26px;
   position: relative;
   width: 100%;
