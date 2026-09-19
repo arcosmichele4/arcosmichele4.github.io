@@ -2,10 +2,11 @@
 
 :root {
   --bg: #ffffff;
-  --fg: #0f0e0e;
-  --muted: #6b6b70;
-  --muted-2: #808086;
-  --line: rgba(15, 14, 14, 0.12);
+  --fg: #640525;
+  --accent: #ffbec7;
+  --muted: rgba(100, 5, 37, 0.78);
+  --muted-2: rgba(100, 5, 37, 0.65);
+  --line: #ffbec7;
 }
 
 * { box-sizing: border-box; }
@@ -225,7 +226,7 @@ body.entering .hero > * {
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 6px;
-  background: #f0f0f0;
+  background: var(--accent);
 }
 
 .work-card img {
@@ -345,13 +346,16 @@ body.entering .hero > * {
   transition: color 0.3s ease;
 }
 
-.services-list li:hover { color: #640525; }
+.services-list li:hover { color: var(--accent); }
 
 .services-list li:last-child { border-bottom: 1px solid var(--line); }
 
 /* ---------- Contact / footer ---------- */
 
-.contact-section { text-align: center; }
+.contact-section {
+  background: var(--accent);
+  text-align: center;
+}
 
 .contact-section h2 {
   margin: 0 auto 32px;
@@ -378,7 +382,11 @@ body.entering .hero > * {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.btn:hover { background: var(--muted); }
+.btn:hover { background: var(--accent); color: var(--fg); }
+
+.contact-section .btn:hover { background: var(--bg); color: var(--fg); }
+
+::selection { background: var(--accent); color: var(--fg); }
 
 footer {
   padding: 40px 0;
