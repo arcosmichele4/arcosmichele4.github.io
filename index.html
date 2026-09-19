@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png?v=2">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=2">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=10">
+<link rel="stylesheet" href="css/style.css?v=11">
 </head>
 <body>
 
@@ -112,24 +112,34 @@
 
   document.body.classList.add('intro-lock');
 
-  var HOLD_AFTER_LOGO = 5000;
+  var HOLD_AFTER_LOGO = 2500;
+  var LOGO_DURATION = 5000;
   var logo = document.getElementById('introLogo');
-  var introTimer;
+  var introTimer, fallbackTimer;
   var done = false;
 
   function finish() {
     if (done) return;
     done = true;
     clearTimeout(introTimer);
+    clearTimeout(fallbackTimer);
+    document.body.classList.add('entering');
     intro.classList.add('intro-hide');
     document.body.classList.remove('intro-lock');
     sessionStorage.setItem('introShown', '1');
-    setTimeout(function () { intro.remove(); }, 1600);
+    setTimeout(function () { intro.remove(); }, 2000);
   }
 
   logo.addEventListener('animationend', function () {
     introTimer = setTimeout(finish, HOLD_AFTER_LOGO);
   });
+
+  logo.addEventListener('animationstart', function () {
+    clearTimeout(fallbackTimer);
+    fallbackTimer = setTimeout(finish, LOGO_DURATION + HOLD_AFTER_LOGO + 1500);
+  });
+
+  fallbackTimer = setTimeout(finish, 15000);
 
   intro.addEventListener('click', finish);
 })();
