@@ -463,15 +463,15 @@ footer {
 .footer-mail {
   text-transform: none;
   letter-spacing: 0.02em;
-  font-size: 13px;
-  color: var(--fg);
+  font-size: 12px;
+  color: var(--muted-2);
 }
 
 .footer-social {
   display: block;
   width: 18px;
   height: 18px;
-  color: var(--fg);
+  color: var(--muted-2);
 }
 
 .footer-social svg {
@@ -481,10 +481,10 @@ footer {
 }
 
 .footer-mail,
-.footer-social { transition: opacity 0.2s ease; }
+.footer-social { transition: color 0.2s ease; }
 
 .footer-mail:hover,
-.footer-social:hover { opacity: 0.5; }
+.footer-social:hover { color: var(--fg); }
 
 /* ---------- Project pages ---------- */
 
