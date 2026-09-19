@@ -8,8 +8,8 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png?v=4">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&display=swap">
-<link rel="stylesheet" href="css/style.css?v=19">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&family=DM+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="css/style.css?v=20">
 </head>
 <body>
 
@@ -38,7 +38,11 @@
 </header>
 
 <section class="hero">
-  <div class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Selected work"></div>
+  <div class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Selected work">
+    <span class="c-frame" aria-hidden="true"></span>
+    <span class="c-caption" id="cCaption" aria-hidden="true"></span>
+    <a class="c-title" id="cTitle" href="#work"></a>
+  </div>
   <h1>Michele Arcos</h1>
   <p>Graphic designer based in Spain focusing on branding &amp; visual identity in expressive, thoughtful forms.</p>
   <a class="scroll-arrow" href="#work" aria-label="Scroll to selected work">
@@ -319,16 +323,22 @@
   if (!root) return;
 
   var DATA = [
-    { href: 'madma.html', src: 'images/covers/madma.jpg', bw: 'images/covers/madma-bw.jpg?v=3', title: 'MADMA', pos: '50% 50%' },
-    { href: 'sol-sal.html', src: 'images/covers/sol-sal.jpg', bw: 'images/covers/sol-sal-bw.jpg?v=3', title: 'SOL & SAL', pos: '50% 50%' },
-    { href: 'xoko.html', src: 'images/covers/xoko.jpg', bw: 'images/covers/xoko-bw.jpg?v=3', title: 'XOKO', pos: '50% 50%' },
-    { href: 'san-isidro.html', src: 'images/covers/san-isidro.jpg', bw: 'images/covers/san-isidro-bw.jpg?v=3', title: 'San Isidro 2025', pos: '50% 40%' },
-    { href: 'espacio-emocional.html', src: 'images/covers/espacio-emocional.jpg', bw: 'images/covers/espacio-emocional-bw.jpg?v=3', title: 'Espacio Emocional', pos: '50% 50%' }
+    { href: 'madma.html', src: 'images/covers/madma.jpg', bw: 'images/covers/madma-bw.jpg?v=3', title: 'MADMA', cat: 'Brand identity', pos: '50% 50%' },
+    { href: 'sol-sal.html', src: 'images/covers/sol-sal.jpg', bw: 'images/covers/sol-sal-bw.jpg?v=3', title: 'SOL & SAL', cat: 'Brand identity', pos: '50% 50%' },
+    { href: 'xoko.html', src: 'images/covers/xoko.jpg', bw: 'images/covers/xoko-bw.jpg?v=3', title: 'XOKO', cat: 'Packaging', pos: '50% 50%' },
+    { href: 'san-isidro.html', src: 'images/covers/san-isidro.jpg', bw: 'images/covers/san-isidro-bw.jpg?v=3', title: 'San Isidro 2025', cat: 'Poster design', pos: '50% 40%' },
+    { href: 'espacio-emocional.html', src: 'images/covers/espacio-emocional.jpg', bw: 'images/covers/espacio-emocional-bw.jpg?v=3', title: 'Espacio Emocional', cat: 'Editorial & research', pos: '50% 50%' }
   ];
   var N = DATA.length;
-  var RANGE = 7, SLOTS = RANGE * 2 + 1;
-  var X = [0, 0.62, 1.12, 1.42, 1.64, 1.82, 1.97, 2.1];
-  var S = [1, 0.78, 0.62, 0.5, 0.42, 0.35, 0.3, 0.26];
+  var RANGE = 9, SLOTS = RANGE * 2 + 1;
+  // side works sit next to each other (no overlap), shrinking and fading toward the edges
+  var GAP_C = 0.055, GAP = 0.025;
+  var S = [1, 0.38], X = [0, 0], O = [1, 1, 0.92, 0.78, 0.6, 0.44, 0.3, 0.2, 0.1, 0];
+  X[1] = 0.5 + GAP_C + S[1] / 2;
+  for (var q = 2; q <= RANGE; q++) {
+    S[q] = S[q - 1] * 0.79;
+    X[q] = X[q - 1] + S[q - 1] / 2 + GAP + S[q] / 2;
+  }
   var AUTOPLAY_MS = 3400;
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -339,7 +349,27 @@
   var dragging = false;
   var running = false;
 
+  var capEl = document.getElementById('cCaption');
+  var titleEl = document.getElementById('cTitle');
+  var labelTimer = null;
+
   function idxFor(p) { return ((active + p) % N + N) % N; }
+
+  function setLabel(immediate) {
+    var d = DATA[active];
+    function put() {
+      capEl.textContent = d.cat;
+      titleEl.textContent = d.title;
+      titleEl.href = d.href;
+      capEl.classList.remove('swap');
+      titleEl.classList.remove('swap');
+    }
+    clearTimeout(labelTimer);
+    if (immediate || reduceMotion) { put(); return; }
+    capEl.classList.add('swap');
+    titleEl.classList.add('swap');
+    labelTimer = setTimeout(put, 280);
+  }
 
   function setContent(el) {
     var d = DATA[idxFor(el.p)];
@@ -359,7 +389,7 @@
     var s = el.a.style;
     s.setProperty('--x', (sign * X[ap]).toString());
     s.setProperty('--s', S[ap].toString());
-    s.setProperty('--o', ap >= RANGE ? '0' : '1');
+    s.setProperty('--o', String(O[ap]));
     s.setProperty('--z', String(RANGE + 3 - ap));
     el.a.classList.toggle('is-center', el.p === 0);
     el.a.style.pointerEvents = ap >= RANGE ? 'none' : '';
@@ -386,6 +416,7 @@
       root.appendChild(a);
       els.push(el);
     }
+    setLabel(true);
     void root.offsetWidth;
     requestAnimationFrame(function () {
       els.forEach(function (el) { el.a.classList.remove('no-anim'); });
@@ -394,6 +425,7 @@
 
   function step(dir) {
     active = ((active + dir) % N + N) % N;
+    setLabel(false);
     els.forEach(function (el) {
       var np = el.p - dir, wrapped = false;
       while (np < -RANGE) { np += SLOTS; wrapped = true; }
