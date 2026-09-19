@@ -165,7 +165,7 @@ a { color: inherit; text-decoration: none; }
   opacity: var(--o, 1);
   transform: translate(calc(-50% + var(--x, 0) * var(--cw)), -50%) scale(var(--s, 1));
   background: var(--soft);
-  transition: transform 0.9s cubic-bezier(0.45, 0.05, 0.2, 1), opacity 0.9s ease;
+  transition: transform 0.75s cubic-bezier(0.45, 0.05, 0.2, 1), opacity 0.75s ease;
   will-change: transform;
 }
 
@@ -220,7 +220,7 @@ a { color: inherit; text-decoration: none; }
 
 .c-item img.col {
   opacity: 0;
-  transition: opacity 0.9s ease;
+  transition: opacity 0.75s ease;
 }
 
 .c-item.is-center img.col { opacity: 1; }
