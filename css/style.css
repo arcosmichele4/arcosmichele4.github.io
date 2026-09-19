@@ -73,10 +73,13 @@ body.entering .hero > * {
   mask-repeat: no-repeat;
   -webkit-mask-position: 100% 0;
   mask-position: 100% 0;
-  animation: logo-write 5s cubic-bezier(0.55, 0.05, 0.3, 1) 1.6s forwards;
   transform-origin: 50% 50%;
   transition: transform 1.9s cubic-bezier(0.7, 0, 0.3, 1);
   will-change: transform;
+}
+
+.intro.run .intro-logo {
+  animation: logo-write 5s cubic-bezier(0.55, 0.05, 0.3, 1) 1.6s forwards;
 }
 
 @keyframes logo-write {
@@ -85,7 +88,8 @@ body.entering .hero > * {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .intro-logo { animation-duration: 0.01s; animation-delay: 0s; transition: none; }
+  .intro.run .intro-logo { animation-duration: 0.01s; animation-delay: 0s; }
+  .intro-logo { transition: none; }
   body.entering .hero > * { animation: none; }
 }
 

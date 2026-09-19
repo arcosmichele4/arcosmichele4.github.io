@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png?v=2">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=2">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=11">
+<link rel="stylesheet" href="css/style.css?v=12">
 </head>
 <body>
 
@@ -105,43 +105,48 @@
 
   var intro = document.getElementById('intro');
 
-  if (sessionStorage.getItem('introShown')) {
+  var seen = false;
+  try { seen = !!sessionStorage.getItem('introShown'); } catch (e) {}
+  if (seen) {
     intro.remove();
     return;
   }
 
   document.body.classList.add('intro-lock');
 
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var LOGO_DELAY = reduceMotion ? 0 : 1600;
+  var LOGO_DURATION = reduceMotion ? 10 : 5000;
   var HOLD_AFTER_LOGO = 2500;
-  var LOGO_DURATION = 5000;
   var logo = document.getElementById('introLogo');
-  var introTimer, fallbackTimer;
   var done = false;
+  var started = false;
 
   function finish() {
     if (done) return;
     done = true;
-    clearTimeout(introTimer);
-    clearTimeout(fallbackTimer);
     document.body.classList.add('entering');
     intro.classList.add('intro-hide');
     document.body.classList.remove('intro-lock');
-    sessionStorage.setItem('introShown', '1');
+    try { sessionStorage.setItem('introShown', '1'); } catch (e) {}
     setTimeout(function () { intro.remove(); }, 2000);
   }
 
-  logo.addEventListener('animationend', function () {
-    introTimer = setTimeout(finish, HOLD_AFTER_LOGO);
-  });
+  function start() {
+    if (started) return;
+    started = true;
+    intro.classList.add('run');
+    setTimeout(finish, LOGO_DELAY + LOGO_DURATION + HOLD_AFTER_LOGO);
+  }
 
-  logo.addEventListener('animationstart', function () {
-    clearTimeout(fallbackTimer);
-    fallbackTimer = setTimeout(finish, LOGO_DURATION + HOLD_AFTER_LOGO + 1500);
-  });
+  if (logo.complete && logo.naturalWidth > 0) {
+    start();
+  } else {
+    logo.addEventListener('load', start);
+    logo.addEventListener('error', start);
+  }
 
-  fallbackTimer = setTimeout(finish, 15000);
-
-  intro.addEventListener('click', finish);
+  setTimeout(finish, 20000);
 })();
 </script>
 
