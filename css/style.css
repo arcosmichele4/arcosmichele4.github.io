@@ -454,12 +454,6 @@ footer {
   color: var(--muted-2);
 }
 
-.footer-links {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-}
-
 .footer-mail {
   text-transform: none;
   letter-spacing: 0.02em;
