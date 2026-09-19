@@ -248,8 +248,33 @@ a { color: inherit; text-decoration: none; }
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-areas:
+    "text photo"
+    "services photo";
+  grid-template-rows: auto 1fr;
+  column-gap: 80px;
+  row-gap: 56px;
+}
+
+.about-text { grid-area: text; }
+.about-services { grid-area: services; align-self: start; }
+
+.about-photo {
+  grid-area: photo;
+  justify-self: end;
+  width: 100%;
+  max-width: 480px;
+  align-self: start;
+  background: #f1f1f1;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.about-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .about-grid h2 {
@@ -383,7 +408,13 @@ footer {
   .site-header { padding: 20px; }
   .site-header nav { display: none; }
   .work-grid { grid-template-columns: 1fr; }
-  .about-grid { grid-template-columns: 1fr; }
+  .about-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "text" "photo" "services";
+    grid-template-rows: auto;
+    row-gap: 40px;
+  }
+  .about-photo { justify-self: center; max-width: 420px; }
   .section { padding: 80px 0; }
   footer { flex-direction: column; gap: 10px; text-align: center; }
 }
