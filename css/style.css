@@ -485,17 +485,55 @@ footer {
   max-width: 640px;
 }
 
+/* collage: rows of 1-3 works with equal height and widths proportional to each image */
+
 .project-images {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 8px;
   padding-bottom: 100px;
 }
 
+.project-images .row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.project-images .row > * {
+  flex: var(--ar, 1) 1 0;
+  min-width: 0;
+}
+
 .project-images img {
-  width: 100%;
   display: block;
-  border-radius: 6px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--ar);
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+/* big work next to a 2 x 3 grid of small ones */
+
+.project-images .collage > img {
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.project-images .mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-content: start;
+}
+
+.project-images .mini-grid img { aspect-ratio: 4 / 5; }
+
+@media (max-width: 600px) {
+  .project-images .row { flex-direction: column; }
+  .project-images .row > * { flex: none; width: 100%; }
+  .project-images .collage > img { height: auto; aspect-ratio: var(--ar); }
 }
 
 /* ---------- Responsive ---------- */
