@@ -266,16 +266,17 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   max-width: 480px;
   align-self: start;
-  background: #f1f1f1;
-  border-radius: 6px;
-  overflow: hidden;
 }
 
 .about-photo img {
   display: block;
   width: 100%;
   height: auto;
+  filter: grayscale(1);
+  transition: filter 0.7s ease;
 }
+
+.about-photo:hover img { filter: grayscale(0); }
 
 .about-grid h2 {
   margin: 0 0 24px;
