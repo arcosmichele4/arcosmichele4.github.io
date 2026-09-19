@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=3">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&display=swap">
-<link rel="stylesheet" href="css/style.css?v=17">
+<link rel="stylesheet" href="css/style.css?v=18">
 </head>
 <body>
 
@@ -40,6 +40,7 @@
 <section class="hero">
   <h1>Michele Arcos</h1>
   <p>Graphic designer based in Spain focusing on branding &amp; visual identity in expressive, thoughtful forms.</p>
+  <div class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Selected work"></div>
   <div class="scroll-cue" aria-hidden="true"></div>
 </section>
 
@@ -129,6 +130,7 @@
   try { seen = !!sessionStorage.getItem('introShown'); } catch (e) {}
   if (seen) {
     intro.remove();
+    document.dispatchEvent(new Event('intro-done'));
     return;
   }
 
@@ -155,6 +157,7 @@
       intro.remove();
       document.body.classList.remove('entering');
       document.body.classList.remove('intro-lock');
+      document.dispatchEvent(new Event('intro-done'));
     }, SLIDE_MS + 150);
   }
 
@@ -306,6 +309,159 @@
     logo.addEventListener('load', start);
     logo.addEventListener('error', start);
   }
+})();
+</script>
+
+<script>
+(function () {
+  var root = document.getElementById('carousel');
+  if (!root) return;
+
+  var DATA = [
+    { href: 'madma.html', src: 'images/covers/madma.jpg', title: 'MADMA', pos: '50% 50%' },
+    { href: 'sol-sal.html', src: 'images/covers/sol-sal.jpg', title: 'SOL & SAL', pos: '50% 50%' },
+    { href: 'xoko.html', src: 'images/covers/xoko.jpg', title: 'XOKO', pos: '50% 50%' },
+    { href: 'san-isidro.html', src: 'images/covers/san-isidro.jpg', title: 'San Isidro 2025', pos: '50% 40%' },
+    { href: 'espacio-emocional.html', src: 'images/covers/espacio-emocional.jpg', title: 'Espacio Emocional', pos: '50% 50%' }
+  ];
+  var N = DATA.length;
+  var RANGE = 3, SLOTS = RANGE * 2 + 1;
+  var X = [0, 0.62, 1.12, 1.42];
+  var S = [1, 0.78, 0.62, 0.5];
+  var AUTOPLAY_MS = 3400;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var els = [];
+  var active = 0;
+  var timer = null;
+  var hovering = false;
+  var dragging = false;
+  var running = false;
+
+  function idxFor(p) { return ((active + p) % N + N) % N; }
+
+  function setContent(el) {
+    var d = DATA[idxFor(el.p)];
+    el.a.href = d.href;
+    el.a.setAttribute('aria-label', d.title);
+    el.img.src = d.src;
+    el.img.alt = '';
+    el.img.style.objectPosition = d.pos;
+  }
+
+  function apply(el) {
+    var ap = Math.abs(el.p);
+    var sign = el.p < 0 ? -1 : 1;
+    var s = el.a.style;
+    s.setProperty('--x', (sign * X[ap]).toString());
+    s.setProperty('--s', S[ap].toString());
+    s.setProperty('--o', ap > 2 ? '0' : '1');
+    s.setProperty('--z', String(10 - ap));
+    el.a.classList.toggle('is-center', el.p === 0);
+    el.a.style.pointerEvents = ap > 2 ? 'none' : '';
+    if (ap > 2) { el.a.setAttribute('tabindex', '-1'); el.a.setAttribute('aria-hidden', 'true'); }
+    else { el.a.removeAttribute('tabindex'); el.a.removeAttribute('aria-hidden'); }
+  }
+
+  function build() {
+    for (var k = 0; k < SLOTS; k++) {
+      var a = document.createElement('a');
+      a.className = 'c-item no-anim';
+      a.draggable = false;
+      var img = document.createElement('img');
+      img.draggable = false;
+      a.appendChild(img);
+      var el = { a: a, img: img, p: k - RANGE };
+      setContent(el);
+      apply(el);
+      root.appendChild(a);
+      els.push(el);
+    }
+    void root.offsetWidth;
+    requestAnimationFrame(function () {
+      els.forEach(function (el) { el.a.classList.remove('no-anim'); });
+    });
+  }
+
+  function step(dir) {
+    active = ((active + dir) % N + N) % N;
+    els.forEach(function (el) {
+      var np = el.p - dir, wrapped = false;
+      while (np < -RANGE) { np += SLOTS; wrapped = true; }
+      while (np > RANGE) { np -= SLOTS; wrapped = true; }
+      el.p = np;
+      if (wrapped) { el.a.classList.add('no-anim'); setContent(el); }
+      apply(el);
+    });
+    void root.offsetWidth;
+    requestAnimationFrame(function () {
+      els.forEach(function (el) { el.a.classList.remove('no-anim'); });
+    });
+  }
+
+  function goTo(shift) {
+    var dir = shift > 0 ? 1 : -1, count = Math.abs(shift), i = 0;
+    step(dir);
+    while (++i < count) { (function (n) { setTimeout(function () { step(dir); }, 300 * n); })(i); }
+  }
+
+  function schedule() {
+    clearInterval(timer);
+    if (!running || reduceMotion) return;
+    timer = setInterval(function () {
+      if (!hovering && !dragging && !document.hidden) step(1);
+    }, AUTOPLAY_MS);
+  }
+
+  function begin() {
+    if (running) return;
+    running = true;
+    schedule();
+  }
+
+  build();
+
+  if (!document.getElementById('intro')) begin();
+  else document.addEventListener('intro-done', begin);
+
+  root.addEventListener('mouseenter', function () { hovering = true; });
+  root.addEventListener('mouseleave', function () { hovering = false; });
+
+  var startX = null, moved = false;
+  root.addEventListener('pointerdown', function (e) {
+    startX = e.clientX; moved = false; dragging = true;
+  });
+  root.addEventListener('pointermove', function (e) {
+    if (startX !== null && Math.abs(e.clientX - startX) > 8) moved = true;
+  });
+  function endDrag(e) {
+    if (startX === null) return;
+    var dx = e.clientX - startX;
+    startX = null; dragging = false;
+    if (Math.abs(dx) > 50) { step(dx < 0 ? 1 : -1); schedule(); }
+  }
+  root.addEventListener('pointerup', endDrag);
+  root.addEventListener('pointercancel', function () { startX = null; dragging = false; });
+  root.addEventListener('pointerleave', function (e) { if (startX !== null) endDrag(e); });
+
+  root.addEventListener('click', function (e) {
+    if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; return; }
+    var a = e.target.closest ? e.target.closest('.c-item') : null;
+    if (!a) return;
+    for (var i = 0; i < els.length; i++) {
+      if (els[i].a === a && els[i].p !== 0) {
+        e.preventDefault();
+        goTo(els[i].p);
+        schedule();
+        return;
+      }
+    }
+  }, true);
+
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { step(1); schedule(); }
+    else if (e.key === 'ArrowLeft') { step(-1); schedule(); }
+  });
 })();
 </script>
 

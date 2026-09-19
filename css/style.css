@@ -173,11 +173,12 @@ body.entering .page {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 140px 24px 80px;
+  padding: 110px 0 44px;
 }
 
 .hero h1 {
   margin: 0;
+  padding: 0 24px;
   font-size: clamp(44px, 8.5vw, 108px);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -186,15 +187,16 @@ body.entering .page {
 
 .hero p {
   margin: 26px 0 0;
+  padding: 0 24px;
   font-size: 13px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
-  max-width: 480px;
+  max-width: 528px;
 }
 
 .scroll-cue {
-  margin-top: 60px;
+  margin-top: 8px;
   width: 1px;
   height: 46px;
   background: var(--line);
@@ -217,6 +219,59 @@ body.entering .page {
   0% { top: -100%; }
   60% { top: 100%; }
   100% { top: 100%; }
+}
+
+/* ---------- Carousel (3D scale) ---------- */
+
+.carousel {
+  --cw: clamp(230px, min(27vw, 42vh), 380px);
+  position: relative;
+  width: 100%;
+  height: calc(var(--cw) * 0.75 + 80px);
+  margin-top: 36px;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.c-item {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--cw) * 0.375 + 14px);
+  width: var(--cw);
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: var(--z, 1);
+  opacity: var(--o, 1);
+  transform: translate(calc(-50% + var(--x, 0) * var(--cw)), -50%) scale(var(--s, 1));
+  box-shadow: 0 26px 38px -14px rgba(100, 5, 37, 0.38);
+  transition: transform 0.9s cubic-bezier(0.45, 0.05, 0.2, 1), opacity 0.9s ease;
+  will-change: transform;
+}
+
+.c-item.no-anim { transition: none; }
+
+.c-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter 0.9s ease;
+  -webkit-user-drag: none;
+}
+
+.c-item.is-center img { filter: grayscale(0); }
+
+.c-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-item, .c-item img { transition: none; }
 }
 
 /* ---------- Section shell ---------- */
