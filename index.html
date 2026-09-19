@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Michele Arcos - Graphic Designer</title>
-<link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png?v=3">
-<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png?v=3">
-<link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=3">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png?v=4">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&display=swap">
-<link rel="stylesheet" href="css/style.css?v=18">
+<link rel="stylesheet" href="css/style.css?v=19">
 </head>
 <body>
 
 <div class="intro" id="intro">
-  <img class="intro-logo" id="introLogo" src="images/logo-mich.png?v=2" alt="Mich">
+  <img class="intro-logo" id="introLogo" src="images/logo-mich.png?v=3" alt="Mich">
   <button class="intro-arrow" id="introArrow" type="button" aria-label="Enter the site" disabled>
     <svg viewBox="0 0 300 120" fill="currentColor" aria-hidden="true">
       <path d="M10.5 90.6L14.4 87.8L18.2 85.2L22.0 82.9L25.8 80.8L29.7 78.9L33.5 77.3L37.5 75.9L41.4 74.6L45.4 73.6L49.4 72.8L53.4 72.1L57.5 71.6L61.6 71.3L65.7 71.1L69.9 71.1L74.2 71.1L78.4 71.3L82.7 71.6L87.1 72.0L91.4 72.4L95.9 73.0L100.3 73.6L104.8 74.3L109.4 75.0L114.0 75.8L118.6 76.6L123.3 77.5L128.0 78.3L132.7 79.1L137.5 80.0L142.3 80.8L147.2 81.6L152.1 82.4L157.0 83.1L162.0 83.7L167.0 84.3L172.1 84.8L177.2 85.2L182.3 85.5L187.5 85.7L192.7 85.8L197.9 85.8L203.2 85.6L208.5 85.3L213.8 84.7L219.2 84.1L224.6 83.2L230.0 82.1L235.5 80.8L241.0 79.3L246.5 77.6L252.0 75.6L257.5 73.4L263.1 70.9L268.7 68.2L274.2 65.2L265.8 50.8L260.9 53.8L255.9 56.4L251.0 58.8L246.1 61.0L241.3 63.0L236.4 64.7L231.5 66.3L226.6 67.7L221.7 68.8L216.8 69.8L212.0 70.7L207.1 71.4L202.2 71.9L197.3 72.3L192.4 72.5L187.5 72.7L182.7 72.7L177.8 72.6L172.9 72.5L168.0 72.2L163.2 71.9L158.3 71.5L153.5 71.0L148.7 70.5L143.9 70.0L139.1 69.4L134.3 68.8L129.5 68.2L124.8 67.6L120.0 67.0L115.3 66.4L110.7 65.9L106.0 65.4L101.4 65.0L96.7 64.6L92.2 64.3L87.6 64.1L83.1 63.9L78.6 63.9L74.1 64.0L69.7 64.2L65.3 64.6L61.0 65.1L56.7 65.7L52.4 66.5L48.2 67.5L44.0 68.7L39.9 70.1L35.9 71.7L31.9 73.5L28.0 75.5L24.1 77.8L20.3 80.3L16.6 83.0L13.0 86.1L9.5 89.4Z"/>
@@ -34,14 +34,16 @@
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
-  <span class="year" id="headerYear"></span>
+  <a href="index.html" class="header-icon" aria-label="Michele Arcos - home"><img src="images/icon-yh.png" alt="yh" width="232" height="120"></a>
 </header>
 
 <section class="hero">
+  <div class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Selected work"></div>
   <h1>Michele Arcos</h1>
   <p>Graphic designer based in Spain focusing on branding &amp; visual identity in expressive, thoughtful forms.</p>
-  <div class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Selected work"></div>
-  <div class="scroll-cue" aria-hidden="true"></div>
+  <a class="scroll-arrow" href="#work" aria-label="Scroll to selected work">
+    <svg viewBox="0 0 40 22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 2l18 18L38 2"/></svg>
+  </a>
 </section>
 
 <section class="section" id="work">
@@ -52,23 +54,23 @@
     </div>
     <div class="work-grid">
       <a class="work-card" href="madma.html">
-        <div class="thumb"><img src="images/covers/madma.jpg" alt="MADMA"></div>
+        <div class="thumb"><img class="bw" src="images/covers/madma-bw.jpg" alt="MADMA"><img class="col" src="images/covers/madma.jpg" alt=""></div>
         <div class="meta"><h3>MADMA</h3><span>Brand identity</span></div>
       </a>
       <a class="work-card" href="sol-sal.html">
-        <div class="thumb"><img src="images/covers/sol-sal.jpg" alt="SOL &amp; SAL"></div>
+        <div class="thumb"><img class="bw" src="images/covers/sol-sal-bw.jpg" alt="SOL &amp; SAL"><img class="col" src="images/covers/sol-sal.jpg" alt=""></div>
         <div class="meta"><h3>SOL &amp; SAL</h3><span>Brand identity</span></div>
       </a>
       <a class="work-card" href="xoko.html">
-        <div class="thumb"><img src="images/covers/xoko.jpg" alt="XOKO"></div>
+        <div class="thumb"><img class="bw" src="images/covers/xoko-bw.jpg" alt="XOKO"><img class="col" src="images/covers/xoko.jpg" alt=""></div>
         <div class="meta"><h3>XOKO</h3><span>Packaging</span></div>
       </a>
       <a class="work-card" href="san-isidro.html">
-        <div class="thumb"><img src="images/covers/san-isidro.jpg" alt="San Isidro 2025" style="object-position: 50% 40%"></div>
+        <div class="thumb"><img class="bw" src="images/covers/san-isidro-bw.jpg" alt="San Isidro 2025" style="object-position: 50% 40%"><img class="col" src="images/covers/san-isidro.jpg" alt="" style="object-position: 50% 40%"></div>
         <div class="meta"><h3>San Isidro 2025</h3><span>Poster design</span></div>
       </a>
       <a class="work-card" href="espacio-emocional.html">
-        <div class="thumb"><img src="images/covers/espacio-emocional.jpg" alt="Espacio Emocional"></div>
+        <div class="thumb"><img class="bw" src="images/covers/espacio-emocional-bw.jpg" alt="Espacio Emocional"><img class="col" src="images/covers/espacio-emocional.jpg" alt=""></div>
         <div class="meta"><h3>Espacio Emocional</h3><span>Editorial &amp; research</span></div>
       </a>
     </div>
@@ -121,7 +123,6 @@
 <script>
 (function () {
   var year = new Date().getFullYear();
-  document.getElementById('headerYear').textContent = '®' + year;
   document.getElementById('footerYear').textContent = year + ' ® Michele Arcos';
 
   var intro = document.getElementById('intro');
@@ -318,11 +319,11 @@
   if (!root) return;
 
   var DATA = [
-    { href: 'madma.html', src: 'images/covers/madma.jpg', title: 'MADMA', pos: '50% 50%' },
-    { href: 'sol-sal.html', src: 'images/covers/sol-sal.jpg', title: 'SOL & SAL', pos: '50% 50%' },
-    { href: 'xoko.html', src: 'images/covers/xoko.jpg', title: 'XOKO', pos: '50% 50%' },
-    { href: 'san-isidro.html', src: 'images/covers/san-isidro.jpg', title: 'San Isidro 2025', pos: '50% 40%' },
-    { href: 'espacio-emocional.html', src: 'images/covers/espacio-emocional.jpg', title: 'Espacio Emocional', pos: '50% 50%' }
+    { href: 'madma.html', src: 'images/covers/madma.jpg', bw: 'images/covers/madma-bw.jpg', title: 'MADMA', pos: '50% 50%' },
+    { href: 'sol-sal.html', src: 'images/covers/sol-sal.jpg', bw: 'images/covers/sol-sal-bw.jpg', title: 'SOL & SAL', pos: '50% 50%' },
+    { href: 'xoko.html', src: 'images/covers/xoko.jpg', bw: 'images/covers/xoko-bw.jpg', title: 'XOKO', pos: '50% 50%' },
+    { href: 'san-isidro.html', src: 'images/covers/san-isidro.jpg', bw: 'images/covers/san-isidro-bw.jpg', title: 'San Isidro 2025', pos: '50% 40%' },
+    { href: 'espacio-emocional.html', src: 'images/covers/espacio-emocional.jpg', bw: 'images/covers/espacio-emocional-bw.jpg', title: 'Espacio Emocional', pos: '50% 50%' }
   ];
   var N = DATA.length;
   var RANGE = 3, SLOTS = RANGE * 2 + 1;
@@ -344,6 +345,9 @@
     var d = DATA[idxFor(el.p)];
     el.a.href = d.href;
     el.a.setAttribute('aria-label', d.title);
+    el.bw.src = d.bw;
+    el.bw.alt = '';
+    el.bw.style.objectPosition = d.pos;
     el.img.src = d.src;
     el.img.alt = '';
     el.img.style.objectPosition = d.pos;
@@ -368,10 +372,15 @@
       var a = document.createElement('a');
       a.className = 'c-item no-anim';
       a.draggable = false;
+      var bw = document.createElement('img');
+      bw.className = 'bw';
+      bw.draggable = false;
+      a.appendChild(bw);
       var img = document.createElement('img');
+      img.className = 'col';
       img.draggable = false;
       a.appendChild(img);
-      var el = { a: a, img: img, p: k - RANGE };
+      var el = { a: a, bw: bw, img: img, p: k - RANGE };
       setContent(el);
       apply(el);
       root.appendChild(a);

@@ -2,11 +2,11 @@
 
 :root {
   --bg: #ffffff;
-  --fg: #640525;
-  --accent: #ffbec7;
-  --muted: rgba(100, 5, 37, 0.78);
-  --muted-2: rgba(100, 5, 37, 0.65);
-  --line: #ffbec7;
+  --fg: #0f0e0e;
+  --soft: #f0f0f0;
+  --muted: #6b6b70;
+  --muted-2: #808086;
+  --line: rgba(15, 14, 14, 0.12);
 }
 
 * { box-sizing: border-box; }
@@ -115,7 +115,7 @@ body.entering .page {
 .intro-arrow.ready:focus-visible svg { transform: translateX(10px); }
 
 .intro-arrow:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--fg);
   outline-offset: 2px;
 }
 
@@ -162,7 +162,16 @@ body.entering .page {
 .site-header nav a:hover,
 .site-header nav a.active { color: var(--fg); }
 
-.site-header .year { color: var(--muted); }
+.site-header .header-icon {
+  display: block;
+  line-height: 0;
+}
+
+.site-header .header-icon img {
+  display: block;
+  height: 30px;
+  width: auto;
+}
 
 /* ---------- Hero ---------- */
 
@@ -173,62 +182,63 @@ body.entering .page {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 110px 0 44px;
+  padding: 84px 0 28px;
 }
 
 .hero h1 {
-  margin: 0;
+  margin: 4px 0 0;
   padding: 0 24px;
-  font-size: clamp(44px, 8.5vw, 108px);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-family: 'Archivo', 'Switzer', sans-serif;
+  font-stretch: 125%;
+  font-size: clamp(24px, 5.4vw, 80px);
+  font-weight: 900;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .hero p {
-  margin: 26px 0 0;
+  margin: 18px 0 0;
   padding: 0 24px;
-  font-size: 13px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-  max-width: 528px;
+  font-size: clamp(13px, 1.15vw, 16px);
+  letter-spacing: 0.005em;
+  color: var(--fg);
+  max-width: 900px;
 }
 
-.scroll-cue {
-  margin-top: 8px;
-  width: 1px;
-  height: 46px;
-  background: var(--line);
-  position: relative;
-  overflow: hidden;
+.scroll-arrow {
+  display: block;
+  margin-top: 24px;
+  width: 30px;
+  color: var(--fg);
+  opacity: 0.85;
+  animation: arrow-nudge 2.2s ease-in-out infinite;
 }
 
-.scroll-cue::after {
-  content: '';
-  position: absolute;
-  top: -100%;
-  left: 0;
+.scroll-arrow svg {
+  display: block;
   width: 100%;
-  height: 100%;
-  background: var(--fg);
-  animation: cue 1.8s ease-in-out infinite;
+  height: auto;
 }
 
-@keyframes cue {
-  0% { top: -100%; }
-  60% { top: 100%; }
-  100% { top: 100%; }
+@keyframes arrow-nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-arrow { animation: none; }
 }
 
 /* ---------- Carousel (3D scale) ---------- */
 
 .carousel {
-  --cw: clamp(230px, min(27vw, 42vh), 380px);
+  --cw: clamp(280px, min(40vw, 50vh), 600px);
   position: relative;
   width: 100%;
-  height: calc(var(--cw) * 0.75 + 80px);
-  margin-top: 36px;
+  height: calc(var(--cw) * 0.75 + 60px);
+  margin-top: 0;
   overflow: hidden;
   touch-action: pan-y;
   user-select: none;
@@ -238,7 +248,7 @@ body.entering .page {
 .c-item {
   position: absolute;
   left: 50%;
-  top: calc(var(--cw) * 0.375 + 14px);
+  top: calc(var(--cw) * 0.375 + 10px);
   width: var(--cw);
   aspect-ratio: 4 / 3;
   border-radius: 4px;
@@ -246,7 +256,8 @@ body.entering .page {
   z-index: var(--z, 1);
   opacity: var(--o, 1);
   transform: translate(calc(-50% + var(--x, 0) * var(--cw)), -50%) scale(var(--s, 1));
-  box-shadow: 0 26px 38px -14px rgba(100, 5, 37, 0.38);
+  background: var(--soft);
+  box-shadow: 0 26px 38px -14px rgba(15, 14, 14, 0.32);
   transition: transform 0.9s cubic-bezier(0.45, 0.05, 0.2, 1), opacity 0.9s ease;
   will-change: transform;
 }
@@ -254,24 +265,31 @@ body.entering .page {
 .c-item.no-anim { transition: none; }
 
 .c-item img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1);
-  transition: filter 0.9s ease;
   -webkit-user-drag: none;
 }
 
-.c-item.is-center img { filter: grayscale(0); }
+.c-item img.col {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.c-item.is-center img.col { opacity: 1; }
+
+.c-item.no-anim img.col { transition: none; }
 
 .c-item:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--fg);
   outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .c-item, .c-item img { transition: none; }
+  .c-item, .c-item img.col { transition: none; }
 }
 
 /* ---------- Section shell ---------- */
@@ -317,22 +335,25 @@ body.entering .page {
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 6px;
-  background: var(--accent);
+  background: var(--soft);
+  position: relative;
 }
 
 .work-card img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(1);
-  transition: transform 0.6s ease, filter 0.7s ease;
+  transition: transform 0.6s ease, opacity 0.7s ease;
 }
 
-.work-card:hover img {
-  transform: scale(1.04);
-  filter: grayscale(0);
-}
+.work-card img.col { opacity: 0; }
+
+.work-card:hover img { transform: scale(1.04); }
+
+.work-card:hover img.col { opacity: 1; }
 
 .work-card .meta {
   display: flex;
@@ -437,14 +458,15 @@ body.entering .page {
   transition: color 0.3s ease;
 }
 
-.services-list li:hover { color: var(--accent); }
+.services-list:hover li { color: rgba(15, 14, 14, 0.22); }
+
+.services-list:hover li:hover { color: var(--fg); }
 
 .services-list li:last-child { border-bottom: 1px solid var(--line); }
 
 /* ---------- Contact / footer ---------- */
 
 .contact-section {
-  background: var(--accent);
   text-align: center;
 }
 
@@ -473,11 +495,9 @@ body.entering .page {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.btn:hover { background: var(--accent); color: var(--fg); }
+.btn:hover { background: var(--muted); }
 
-.contact-section .btn:hover { background: var(--bg); color: var(--fg); }
-
-::selection { background: var(--accent); color: var(--fg); }
+::selection { background: var(--fg); color: var(--bg); }
 
 footer {
   padding: 40px 0;
