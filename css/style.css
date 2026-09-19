@@ -342,7 +342,10 @@ body.entering .hero > * {
   line-height: 1.1;
   letter-spacing: -0.005em;
   text-transform: uppercase;
+  transition: color 0.3s ease;
 }
+
+.services-list li:hover { color: #640525; }
 
 .services-list li:last-child { border-bottom: 1px solid var(--line); }
 
