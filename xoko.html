@@ -8,18 +8,18 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png?v=4">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=24">
+<link rel="stylesheet" href="css/style.css?v=25">
 </head>
 <body>
 
 <header class="site-header">
-  <a href="index.html" class="brand">Michele Arcos</a>
+  <a href="index.html" class="brand">Spain</a>
   <nav>
     <a href="index.html#work" class="active">Work</a>
     <a href="index.html#about">About</a>
     <a href="index.html#contact">Contact</a>
   </nav>
-  <a href="index.html" class="header-icon" aria-label="Michele Arcos - home"><img src="images/icon-yh.png" alt="yh" width="232" height="120"></a>
+  <span class="year" id="headerYear"></span>
 </header>
 
 <div class="wrap">
@@ -45,6 +45,7 @@
 
 <script>
 var year = new Date().getFullYear();
+document.getElementById('headerYear').textContent = year;
 document.getElementById('footerYear').textContent = year + ' ® Michele Arcos';
 </script>
 
