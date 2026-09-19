@@ -9,13 +9,15 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=3">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&display=swap">
-<link rel="stylesheet" href="css/style.css?v=15">
+<link rel="stylesheet" href="css/style.css?v=16">
 </head>
 <body>
 
 <div class="intro" id="intro">
   <img class="intro-logo" id="introLogo" src="images/logo-mich.png?v=2" alt="Mich">
 </div>
+
+<div class="page" id="page">
 
 <header class="site-header">
   <a href="index.html" class="brand">Michele Arcos</a>
@@ -105,6 +107,8 @@
   <span>Michele Arcos</span>
 </footer>
 
+</div>
+
 <script>
 (function () {
   var year = new Date().getFullYear();
@@ -126,6 +130,7 @@
   var LOGO_DELAY = reduceMotion ? 0 : 1600;
   var LOGO_DURATION = reduceMotion ? 10 : 5000;
   var HOLD_AFTER_LOGO = 2500;
+  var SLIDE_MS = reduceMotion ? 0 : 1400;
   var logo = document.getElementById('introLogo');
   var done = false;
   var started = false;
@@ -135,9 +140,12 @@
     done = true;
     document.body.classList.add('entering');
     intro.classList.add('intro-hide');
-    document.body.classList.remove('intro-lock');
     try { sessionStorage.setItem('introShown', '1'); } catch (e) {}
-    setTimeout(function () { intro.remove(); }, 2000);
+    setTimeout(function () {
+      intro.remove();
+      document.body.classList.remove('entering');
+      document.body.classList.remove('intro-lock');
+    }, SLIDE_MS + 150);
   }
 
   function start() {
