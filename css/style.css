@@ -126,10 +126,10 @@ section[id] { scroll-margin-top: var(--hh); }
 
 .carousel {
   --cw: clamp(280px, min(40vw, 70vh), 640px);
-  --top: 26px;
+  --top: 58px;
   position: relative;
   width: 100%;
-  height: calc(var(--cw) * 0.75 + 52px);
+  height: calc(var(--cw) * 0.75 + 122px);
   margin-top: 0;
   overflow: hidden;
   touch-action: pan-y;
@@ -188,6 +188,36 @@ section[id] { scroll-margin-top: var(--hh); }
     linear-gradient(var(--c), var(--c)) bottom right / 1px var(--l);
   background-repeat: no-repeat;
 }
+
+.c-caption,
+.c-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'DM Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  z-index: 30;
+}
+
+.c-caption {
+  top: 6px;
+  font-size: clamp(11px, 0.95vw, 14px);
+  letter-spacing: 0.08em;
+  color: var(--muted-2);
+}
+
+.c-title {
+  top: calc(var(--top) + var(--cw) * 0.75 + 34px);
+  font-size: clamp(12px, 1.05vw, 15px);
+  letter-spacing: 0.06em;
+  color: var(--fg);
+}
+
+.c-caption.swap,
+.c-title.swap { opacity: 0; }
 
 
 
