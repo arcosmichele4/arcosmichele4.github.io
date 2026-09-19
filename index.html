@@ -326,9 +326,9 @@
     { href: 'espacio-emocional.html', src: 'images/covers/espacio-emocional.jpg', bw: 'images/covers/espacio-emocional-bw.jpg?v=3', title: 'Espacio Emocional', pos: '50% 50%' }
   ];
   var N = DATA.length;
-  var RANGE = 3, SLOTS = RANGE * 2 + 1;
-  var X = [0, 0.62, 1.12, 1.42];
-  var S = [1, 0.78, 0.62, 0.5];
+  var RANGE = 7, SLOTS = RANGE * 2 + 1;
+  var X = [0, 0.62, 1.12, 1.42, 1.64, 1.82, 1.97, 2.1];
+  var S = [1, 0.78, 0.62, 0.5, 0.42, 0.35, 0.3, 0.26];
   var AUTOPLAY_MS = 3400;
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -359,11 +359,11 @@
     var s = el.a.style;
     s.setProperty('--x', (sign * X[ap]).toString());
     s.setProperty('--s', S[ap].toString());
-    s.setProperty('--o', ap > 2 ? '0' : '1');
-    s.setProperty('--z', String(10 - ap));
+    s.setProperty('--o', ap >= RANGE ? '0' : '1');
+    s.setProperty('--z', String(RANGE + 3 - ap));
     el.a.classList.toggle('is-center', el.p === 0);
-    el.a.style.pointerEvents = ap > 2 ? 'none' : '';
-    if (ap > 2) { el.a.setAttribute('tabindex', '-1'); el.a.setAttribute('aria-hidden', 'true'); }
+    el.a.style.pointerEvents = ap >= RANGE ? 'none' : '';
+    if (ap > 3) { el.a.setAttribute('tabindex', '-1'); el.a.setAttribute('aria-hidden', 'true'); }
     else { el.a.removeAttribute('tabindex'); el.a.removeAttribute('aria-hidden'); }
   }
 
