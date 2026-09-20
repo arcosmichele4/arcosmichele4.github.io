@@ -1,14 +1,12 @@
 @import url('https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap');
 
-@font-face {
-  font-family: 'Palugada';
-  src: url('../fonts/Palugada.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Poppins:wght@700;800&display=swap');
 
 :root {
+  /* small titles and short phrases: monospace caps; big display words: heavy geometric sans */
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-display: 'Poppins', 'Switzer', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+
   --bg: #ffffff;
   --fg: #0f0e0e;
   --soft: #f0f0f0;
@@ -52,14 +50,15 @@ a { color: inherit; text-decoration: none; }
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 26px 32px;
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .site-header .brand {
   justify-self: start;
-  text-transform: uppercase;
   color: var(--fg);
 }
 
@@ -71,7 +70,7 @@ a { color: inherit; text-decoration: none; }
 .site-header .brand,
 .site-header nav a,
 .site-header .year {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.02em;
   line-height: 1;
@@ -87,19 +86,11 @@ a { color: inherit; text-decoration: none; }
   color: var(--fg);
 }
 
-/* SPAIN and the year use the same type style as the GRAPHIC DESIGNER tagline */
-
-.site-header .brand,
-.site-header .year {
-  font-weight: 400;
-  letter-spacing: 0.06em;
-}
-
 /* ---------- Hero ---------- */
 
 .hero {
   /* the name spans the full screen width (minus the same side margins as the header) */
-  --hfs: calc((100cqw - 64px) / 8.3);
+  --hfs: calc((100cqw - 64px) / 7.9);
   container-type: inline-size;
   min-height: 100vh;
   display: flex;
@@ -113,11 +104,11 @@ a { color: inherit; text-decoration: none; }
 .hero h1 {
   margin: 16px 0 0;
   padding: 0;
-  font-family: 'Palugada', 'Archivo', 'Switzer', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(28px, 7.2vw, 112px);
   font-size: var(--hfs);
-  font-weight: 400;
-  letter-spacing: 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
@@ -126,8 +117,10 @@ a { color: inherit; text-decoration: none; }
 .hero p {
   margin: 18px 0 0;
   padding: 0 24px;
-  font-size: clamp(13px, 1.15vw, 16px);
-  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+  font-size: clamp(12px, 1vw, 15px);
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--fg);
   max-width: 900px;
@@ -273,14 +266,18 @@ a { color: inherit; text-decoration: none; }
 
 .section-head h2 {
   margin: 0;
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: var(--font-mono);
+  font-size: clamp(20px, 2.4vw, 32px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
 .section-tag {
+  font-family: var(--font-mono);
   font-size: 12px;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted-2);
 }
@@ -330,13 +327,18 @@ a { color: inherit; text-decoration: none; }
 
 .work-card .meta h3 {
   margin: 0;
-  font-size: 19px;
+  font-family: var(--font-mono);
+  font-size: 14px;
   font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .work-card .meta span {
+  font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted-2);
   white-space: nowrap;
@@ -351,12 +353,12 @@ a { color: inherit; text-decoration: none; }
 
 .about-text h2 {
   margin: 0 0 28px;
-  font-family: 'Palugada', 'Switzer', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(32px, 11vw, 150px);
-  font-size: 11.9cqw;
-  font-weight: 400;
+  font-size: 12.9cqw;
+  font-weight: 800;
   line-height: 1.05;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -381,9 +383,10 @@ a { color: inherit; text-decoration: none; }
 
 .services-title {
   margin: 0 0 14px;
-  font-size: clamp(16px, 1.6vw, 22px);
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -396,11 +399,11 @@ a { color: inherit; text-decoration: none; }
 .services-list li {
   padding: 0.14em 0 0.12em;
   border-top: 1px solid var(--line);
-  font-family: 'Palugada', 'Archivo', 'Switzer', sans-serif;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: clamp(30px, 8vw, 104px);
   line-height: 1.1;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   transition: color 0.3s ease;
 }
@@ -419,10 +422,12 @@ a { color: inherit; text-decoration: none; }
 
 .contact-section h2 {
   margin: 0 auto 32px;
-  font-size: clamp(34px, 6vw, 64px);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  font-family: var(--font-mono);
+  font-size: clamp(26px, 3.6vw, 46px);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.25;
+  text-transform: uppercase;
   max-width: 720px;
 }
 
@@ -435,9 +440,10 @@ a { color: inherit; text-decoration: none; }
   border-radius: 999px;
   background: var(--fg);
   color: var(--bg);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -451,6 +457,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -489,8 +496,11 @@ footer {
   display: inline-block;
   margin: 120px 0 40px;
   color: var(--muted);
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .back-link:hover { color: var(--fg); }
@@ -501,9 +511,12 @@ footer {
 
 .project-header h1 {
   margin: 0 0 20px;
-  font-size: clamp(32px, 5.5vw, 56px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: var(--font-mono);
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.15;
+  text-transform: uppercase;
 }
 
 .project-header p {
