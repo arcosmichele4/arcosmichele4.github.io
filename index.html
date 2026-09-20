@@ -138,7 +138,8 @@ document.getElementById('headerYear').textContent = new Date().getFullYear();
   var NAME = 'MICHELE ARCOS';
   var FONT = "'Poppins', 'Arial Black', Arial, sans-serif";
   var DELAY = 0.3, STAGGER = 0.11, FADE = 0.7;   // letters
-  var ZOOM_AT = 2.9, ZOOM = 2.4;                 // seconds
+  var PAN_AT = 2.6, PAN = 0.8;                   // the "O" slides to the center of the screen...
+  var ZOOM_AT = 3.4, ZOOM = 2.2;                 // ...then the camera goes in, always centered (seconds)
   var INK = '#0f0e0e';
 
   var canvas = document.createElement('canvas');
@@ -265,8 +266,9 @@ document.getElementById('headerYear').textContent = new Date().getFullYear();
     var p = clamp((t - ZOOM_AT) / ZOOM, 0, 1);
     var e = easeInOutCubic(p);
     var S = Math.pow(S_END, e);
-    // the O glides to the center of the screen while the camera goes in
-    var g = easeInOutCubic(clamp(p / 0.85, 0, 1));
+    // 1) the camera pans so the O sits exactly in the middle of the screen (before any zoom);
+    // 2) the zoom then happens around the center, so the ring is symmetric all the way in
+    var g = easeInOutCubic(clamp((t - PAN_AT) / PAN, 0, 1));
     var Q = { x: P.x + (W / 2 - P.x) * g, y: P.y + (H / 2 - P.y) * g };
     draw(t, S, Q);
     // the homepage lives inside the O: it grows with the camera, always centered in the hole,
@@ -284,8 +286,9 @@ document.getElementById('headerYear').textContent = new Date().getFullYear();
   }
 
   function begin() {
-    try { layout(); } catch (err) { finish(); return; }
+    // lock the scroll first, so the width we measure is the one the animation will really use
     document.body.classList.add('intro-lock');
+    try { layout(); } catch (err) { finish(); return; }
     page.style.height = H + 'px';
     page.style.overflow = 'hidden';
     page.style.opacity = '0';
