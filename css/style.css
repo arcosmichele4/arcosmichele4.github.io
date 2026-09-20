@@ -334,13 +334,8 @@ a { color: inherit; text-decoration: none; }
 
 .about-text h2 {
   margin: 0 0 24px;
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.about-text h2 .name-font {
   font-family: 'Palugada', 'Switzer', sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
   font-weight: 400;
   letter-spacing: 0;
 }
