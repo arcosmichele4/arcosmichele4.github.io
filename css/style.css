@@ -87,6 +87,14 @@ a { color: inherit; text-decoration: none; }
   color: var(--fg);
 }
 
+/* SPAIN and the year use the same type style as the GRAPHIC DESIGNER tagline */
+
+.site-header .brand,
+.site-header .year {
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
 /* ---------- Hero ---------- */
 
 .hero {
