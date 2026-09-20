@@ -8,10 +8,20 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png?v=4">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=57">
+<link rel="stylesheet" href="css/style.css?v=58">
+<script>
+/* the entrance animation plays once per visit: hide the page until it starts */
+try {
+  if (!sessionStorage.getItem('introShown') && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    document.documentElement.classList.add('intro-pending');
+  }
+} catch (e) {}
+</script>
 </head>
 <body>
 
+
+<div class="page" id="page">
 
 <header class="site-header">
   <span class="brand">Spain</span>
@@ -106,8 +116,181 @@
 </footer>
 
 
+</div>
+
 <script>
 document.getElementById('headerYear').textContent = new Date().getFullYear();
+</script>
+
+<script>
+/* Entrance animation: the name fades in letter by letter (black on white), then the
+   "camera" flies into the O of ARCOS and the homepage appears inside it. Drawn on a
+   canvas so the letters stay sharp at any zoom. */
+(function () {
+  var root = document.documentElement;
+  var page = document.getElementById('page');
+  if (!root.classList.contains('intro-pending') || !page || !document.fonts) {
+    root.classList.remove('intro-pending');
+    return;
+  }
+  window.__introRunning = true;
+
+  var NAME = 'MICHELE ARCOS';
+  var FONT = "'Poppins', 'Arial Black', Arial, sans-serif";
+  var DELAY = 0.3, STAGGER = 0.11, FADE = 0.7;   // letters
+  var ZOOM_AT = 2.9, ZOOM = 2.4;                 // seconds
+  var INK = '#0f0e0e';
+
+  var canvas = document.createElement('canvas');
+  canvas.className = 'intro-canvas';
+  canvas.setAttribute('aria-hidden', 'true');
+  var ctx = canvas.getContext('2d');
+  var W, H, dpr, fs, base, letters, P, hole, S_END;
+  var raf = 0, start = 0, done = false;
+
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+  function easeInOutCubic(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+
+  // where is the hole of the "O"? measured on the real glyph (em units, relative to the glyph origin)
+  function measureCounter() {
+    var size = 400, N = 1000, ox = 250, oy = 700;
+    var c = document.createElement('canvas');
+    c.width = c.height = N;
+    var g = c.getContext('2d');
+    g.fillStyle = '#000';
+    g.font = '800 ' + size + 'px ' + FONT;
+    g.textBaseline = 'alphabetic';
+    g.fillText('O', ox, oy);
+    var d = g.getImageData(0, 0, N, N).data;
+    function solid(x, y) { return d[(y * N + x) * 4 + 3] > 128; }
+    var minX = N, maxX = 0, minY = N, maxY = 0, x, y;
+    for (y = 0; y < N; y += 2) for (x = 0; x < N; x += 2) {
+      if (solid(x, y)) { if (x < minX) minX = x; if (x > maxX) maxX = x; if (y < minY) minY = y; if (y > maxY) maxY = y; }
+    }
+    var cx = Math.round((minX + maxX) / 2), cy = Math.round((minY + maxY) / 2);
+    var l = cx, r = cx, t = cy, b = cy;
+    while (l > minX && !solid(l, cy)) l--;
+    while (r < maxX && !solid(r, cy)) r++;
+    var ccx = Math.round((l + r) / 2);
+    while (t > minY && !solid(ccx, t)) t--;
+    while (b < maxY && !solid(ccx, b)) b++;
+    var ccy = Math.round((t + b) / 2);
+    l = ccx; r = ccx;
+    while (l > minX && !solid(l, ccy)) l--;
+    while (r < maxX && !solid(r, ccy)) r++;
+    return { cx: ((l + r) / 2 - ox) / size, cy: (ccy - oy) / size, rx: (r - l) / 2 / size, ry: (b - t) / 2 / size };
+  }
+
+  function layout() {
+    W = root.clientWidth;
+    H = window.innerHeight;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    fs = W * 0.8 / 7.84;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.font = '800 ' + fs + 'px ' + FONT;
+    var ls = -0.02 * fs, total = 0, k = 0;
+    letters = [];
+    for (var i = 0; i < NAME.length; i++) {
+      var ch = NAME.charAt(i), w = ctx.measureText(ch).width;
+      letters.push({ ch: ch, x: total, order: ch === ' ' ? -1 : k++ });
+      total += w + ls;
+    }
+    total -= ls;
+    var x0 = (W - total) / 2;
+    for (i = 0; i < letters.length; i++) letters[i].x += x0;
+    base = H / 2 + ctx.measureText('M').actualBoundingBoxAscent / 2;
+    var oc = measureCounter(), o = letters[NAME.indexOf('O')];
+    P = { x: o.x + oc.cx * fs, y: base + oc.cy * fs };
+    hole = { rx: oc.rx * fs * 1.03, ry: oc.ry * fs * 1.03 };
+    S_END = Math.sqrt(Math.pow(Math.max(P.x, W - P.x) / hole.rx, 2) + Math.pow(Math.max(P.y, H - P.y) / hole.ry, 2)) * 1.05;
+    page.style.transformOrigin = (W / 2) + 'px ' + (H / 2) + 'px';
+  }
+
+  function draw(t, S) {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, W, H);
+    ctx.save();
+    ctx.translate(P.x, P.y);
+    ctx.scale(S, S);
+    ctx.translate(-P.x, -P.y);
+    // cut the hole of the O so the page shows through it
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.ellipse(P.x, P.y, hole.rx, hole.ry, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+    // the letters (drawn over the edge of the hole, so no gaps)
+    ctx.fillStyle = INK;
+    ctx.font = '800 ' + fs + 'px ' + FONT;
+    ctx.textBaseline = 'alphabetic';
+    for (var i = 0; i < letters.length; i++) {
+      var L = letters[i];
+      if (L.order < 0) continue;
+      var a = clamp((t - DELAY - L.order * STAGGER) / FADE, 0, 1);
+      ctx.globalAlpha = 1 - Math.pow(1 - a, 2);
+      ctx.fillText(L.ch, L.x, base);
+    }
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  }
+
+  function finish() {
+    if (done) return;
+    done = true;
+    cancelAnimationFrame(raf);
+    window.removeEventListener('resize', finish);
+    page.style.cssText = '';
+    root.classList.remove('intro-pending');
+    document.body.classList.remove('intro-lock');
+    if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+    try { sessionStorage.setItem('introShown', '1'); } catch (e) {}
+    window.scrollTo(0, 0);
+    document.dispatchEvent(new Event('intro-done'));
+  }
+
+  function render(t) {
+    var p = clamp((t - ZOOM_AT) / ZOOM, 0, 1);
+    var e = easeInOutCubic(p);
+    var S = Math.pow(S_END, e);
+    draw(t, S);
+    // the homepage grows with the camera: from tiny (inside the O) to full size
+    var sigma = S / S_END, w = (sigma - 1 / S_END) / (1 - 1 / S_END);
+    page.style.transform = 'translate(' + ((P.x - W / 2) * (1 - w)) + 'px,' + ((P.y - H / 2) * (1 - w)) + 'px) scale(' + sigma + ')';
+    page.style.opacity = clamp((e - 0.02) / 0.25, 0, 1);
+    return p;
+  }
+
+  function frame(now) {
+    if (done) return;
+    if (!start) start = now;
+    if (render((now - start) / 1000) >= 1) finish(); else raf = requestAnimationFrame(frame);
+  }
+
+  function begin() {
+    try { layout(); } catch (err) { finish(); return; }
+    document.body.classList.add('intro-lock');
+    page.style.height = H + 'px';
+    page.style.overflow = 'hidden';
+    page.style.opacity = '0';
+    document.body.appendChild(canvas);
+    canvas.addEventListener('click', finish);
+    window.addEventListener('resize', finish);
+    draw(0, 1);
+    raf = requestAnimationFrame(frame);
+  }
+
+  var ready = Promise.race([
+    document.fonts.load('800 100px Poppins'),
+    new Promise(function (res) { setTimeout(res, 2500); })
+  ]);
+  ready.then(begin, begin);
+})();
 </script>
 
 <script>
@@ -233,7 +416,9 @@ document.getElementById('headerYear').textContent = new Date().getFullYear();
 
   build();
 
-  begin();
+  // while the entrance animation plays, the carousel waits; it starts when the homepage is revealed
+  if (window.__introRunning) document.addEventListener('intro-done', begin);
+  else begin();
 
   root.addEventListener('mouseenter', function () { hovering = true; });
   root.addEventListener('mouseleave', function () { hovering = false; });
