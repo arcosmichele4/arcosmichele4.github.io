@@ -140,6 +140,7 @@ document.getElementById('headerYear').textContent = new Date().getFullYear();
   var DELAY = 0.3, STAGGER = 0.11, FADE = 0.7;   // letters
   var PAN_AT = 2.6, PAN = 0.8;                   // the "O" slides to the center of the screen...
   var ZOOM_AT = 3.4, ZOOM = 2.2;                 // ...then the camera goes in, always centered (seconds)
+  var REVEAL_FROM = 0.6;                         // the homepage only starts to appear once the O is already big
   var INK = '#0f0e0e';
 
   var canvas = document.createElement('canvas');
@@ -271,11 +272,12 @@ document.getElementById('headerYear').textContent = new Date().getFullYear();
     var g = easeInOutCubic(clamp((t - PAN_AT) / PAN, 0, 1));
     var Q = { x: P.x + (W / 2 - P.x) * g, y: P.y + (H / 2 - P.y) * g };
     draw(t, S, Q);
-    // the homepage lives inside the O: it grows with the camera, always centered in the hole,
-    // and its opacity rises gradually from 0 to 1
+    // the homepage lives inside the O and grows with the camera, always centered in the hole.
+    // It stays invisible while the letter is still small: it only starts to appear once the O has
+    // been enlarged (from the middle of the zoom), and its opacity then rises gradually from 0 to 1
     var sigma = S / S_END;
     page.style.transform = 'translate(' + (Q.x - W / 2) + 'px,' + (Q.y - H / 2) + 'px) scale(' + sigma + ')';
-    page.style.opacity = e;
+    page.style.opacity = clamp((e - REVEAL_FROM) / (1 - REVEAL_FROM), 0, 1);
     return p;
   }
 
