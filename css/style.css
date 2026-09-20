@@ -339,6 +339,12 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.01em;
 }
 
+.about-text h2 .name-font {
+  font-family: 'Palugada', 'Switzer', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
 .about-text p {
   margin: 0 0 18px;
   font-size: 15px;
