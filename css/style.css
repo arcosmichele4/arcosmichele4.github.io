@@ -9,20 +9,18 @@
 }
 
 :root {
-  --bg: #ffffff;
-  --fg: #0f0e0e;
-  --soft: #f0f0f0;
-  --muted: #6b6b70;
-  --muted-2: #808086;
-  --line: rgba(15, 14, 14, 0.12);
+  /* warm palette: cream background, warm gray text, yellow details */
+  --bg: #efece3;
+  --fg: #706f6a;
+  --soft: #e5e1d5;
+  --muted: #706f6a;
+  --muted-2: #706f6a;
+  --line: rgba(112, 111, 106, 0.25);
+  --dim: rgba(112, 111, 106, 0.35);
 
-  /* accent: periwinkle blue (same hue as the reference #b9d0fa)
-     --accent      text on white / buttons / arrows (white on it is 4.8:1)
-     --accent-zone big blue areas (About, Contact) that carry white text (3.6:1)
-     --accent-pale the exact reference blue, for text-free fills */
-  --accent: #2c6ddd;
-  --accent-zone: #4f84f3;
-  --accent-pale: #b9d0fa;
+  /* yellow is only used as a fill (chips, buttons, zones, hover), never as text */
+  --accent: #fef179;
+  --accent-soft: #f8eda5;
 }
 
 * { box-sizing: border-box; }
@@ -86,9 +84,14 @@ a { color: inherit; text-decoration: none; }
   color: var(--fg);
 }
 
-.site-header nav a { transition: color 0.2s ease; }
+.site-header nav a {
+  padding: 6px 12px;
+  margin: -6px -12px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
 
-.site-header nav a:hover { color: var(--accent); }
+.site-header nav a:hover { background: var(--accent); }
 
 .site-header .year {
   justify-self: end;
@@ -133,25 +136,32 @@ a { color: inherit; text-decoration: none; }
 
 .hero p {
   margin: 18px 0 0;
-  padding: 0 24px;
+  padding: 7px 20px;
+  border-radius: 999px;
+  background: var(--accent);
   font-size: clamp(13px, 1.15vw, 16px);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--fg);
   max-width: 900px;
 }
 
 .scroll-arrow {
-  display: block;
-  margin-top: 24px;
-  width: 30px;
-  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--fg);
   animation: arrow-nudge 2.2s ease-in-out infinite;
 }
 
 .scroll-arrow svg {
   display: block;
-  width: 100%;
+  width: 18px;
   height: auto;
 }
 
@@ -168,7 +178,7 @@ a { color: inherit; text-decoration: none; }
 
 .carousel {
   --cw: clamp(280px, min(58vw, 64vh), 800px);
-  --cw: clamp(280px, min(58vw, 64vh, (100vh - 268px - var(--hfs)) / 0.75), 800px);
+  --cw: clamp(280px, min(58vw, 64vh, (100vh - 306px - var(--hfs)) / 0.75), 800px);
   --top: 26px;
   position: relative;
   width: 100%;
@@ -200,7 +210,7 @@ a { color: inherit; text-decoration: none; }
   content: '';
   position: absolute;
   inset: 0;
-  border: 1px solid rgba(15, 14, 14, 0.1);
+  border: 1px solid rgba(112, 111, 106, 0.2);
   pointer-events: none;
 }
 
@@ -211,7 +221,7 @@ a { color: inherit; text-decoration: none; }
 .c-frame {
   --m: calc(var(--cw) * 0.03);
   --l: 9px;
-  --c: var(--accent);
+  --c: var(--fg);
   position: absolute;
   left: 50%;
   top: calc(var(--top) + var(--cw) * 0.375);
@@ -255,7 +265,7 @@ a { color: inherit; text-decoration: none; }
 .c-item.no-anim img.col { transition: none; }
 
 .c-item:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--fg);
   outline-offset: 3px;
 }
 
@@ -286,10 +296,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 .section-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--accent);
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--fg);
 }
 
 /* ---------- Work grid ---------- */
@@ -333,7 +347,7 @@ a { color: inherit; text-decoration: none; }
   margin-top: 18px;
   padding-bottom: 18px;
   border-bottom: 1px solid var(--line);
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .work-card .meta h3 {
@@ -344,17 +358,24 @@ a { color: inherit; text-decoration: none; }
 }
 
 .work-card .meta span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--fg);
   white-space: nowrap;
   margin-left: 16px;
+  transition: background-color 0.3s ease;
 }
 
-.work-card:hover .meta { border-bottom-color: var(--accent); }
+.work-card:hover .meta span { background: var(--accent); }
 
-.work-card:hover .meta h3 { color: var(--accent); }
+.work-card:hover .meta {
+  border-bottom-color: var(--accent);
+  box-shadow: 0 1px 0 var(--accent);
+}
 
 /* ---------- About ---------- */
 
@@ -388,16 +409,14 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.5;
 }
 
-/* the About block sits on the blue zone: all its text is white */
+/* the About block sits on the pale yellow zone */
 
 .about-section {
-  background: var(--accent-zone);
-  color: #fff;
+  background: var(--accent-soft);
   border-top: 0;
 }
 
 .about-section .about-text p {
-  color: #fff;
   font-size: 16px;
   font-weight: 500;
 }
@@ -405,7 +424,6 @@ a { color: inherit; text-decoration: none; }
 .about-section .about-text p.about-lead { font-size: clamp(19px, 2vw, 25px); }
 
 .about-section .kw {
-  color: #fff;
   font-weight: 700;
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -439,12 +457,27 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.1;
   letter-spacing: 0;
   text-transform: uppercase;
+  position: relative;
+  isolation: isolate;
   transition: color 0.3s ease;
 }
 
-.services-list:hover li { color: rgba(15, 14, 14, 0.22); }
+/* the hovered service gets a yellow highlight band behind the text */
+.services-list li::before {
+  content: '';
+  position: absolute;
+  inset: 4px -0.2em;
+  z-index: -1;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
-.services-list:hover li:hover { color: var(--accent); }
+.services-list:hover li { color: var(--dim); }
+
+.services-list:hover li:hover { color: var(--fg); }
+
+.services-list:hover li:hover::before { opacity: 1; }
 
 .services-list li:last-child { border-bottom: 1px solid var(--line); }
 
@@ -452,8 +485,7 @@ a { color: inherit; text-decoration: none; }
 
 .contact-section {
   text-align: center;
-  background: var(--accent-zone);
-  color: #fff;
+  background: var(--accent);
   border-top: 0;
 }
 
@@ -474,7 +506,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0 30px;
   border-radius: 999px;
   background: var(--accent);
-  color: #fff;
+  color: var(--fg);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -482,19 +514,16 @@ a { color: inherit; text-decoration: none; }
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.btn:hover { background: var(--fg); }
+.btn:hover { background: var(--accent-soft); }
 
-/* on the blue zone the button is white, so its label never sits on blue */
-.contact-section .btn { background: #fff; color: var(--accent); }
+/* on the yellow contact zone the button is warm gray with cream text */
+.contact-section .btn { background: var(--fg); color: var(--bg); }
 
-.contact-section .btn:hover { background: var(--fg); color: #fff; }
+.contact-section .btn:hover { background: var(--bg); color: var(--fg); }
 
-::selection { background: var(--accent-pale); color: var(--fg); }
+::selection { background: var(--accent); color: var(--fg); }
 
-.kw {
-  color: var(--accent);
-  font-weight: 500;
-}
+.kw { font-weight: 500; }
 
 footer {
   padding: 40px 0;
@@ -528,10 +557,20 @@ footer {
 }
 
 .footer-mail,
-.footer-social { transition: color 0.2s ease; }
+.footer-social { transition: background-color 0.2s ease, box-shadow 0.2s ease; }
 
-.footer-mail:hover,
-.footer-social:hover { color: var(--accent); }
+/* yellow highlight on hover (box-shadow grows the highlight without moving the layout) */
+.footer-mail:hover {
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent);
+  border-radius: 4px;
+}
+
+.footer-social:hover {
+  background: var(--accent);
+  box-shadow: 0 0 0 8px var(--accent);
+  border-radius: 50%;
+}
 
 /* ---------- Project pages ---------- */
 
@@ -543,11 +582,17 @@ footer {
   letter-spacing: 0.04em;
 }
 
-.back-link:hover { color: var(--accent); }
+.back-link { transition: background-color 0.2s ease, box-shadow 0.2s ease; }
+
+.back-link:hover {
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent);
+  border-radius: 4px;
+}
 
 .project-header { margin-bottom: 48px; }
 
-.project-header .section-tag { margin-bottom: 16px; display: block; }
+.project-header .section-tag { margin-bottom: 18px; }
 
 .project-header h1 {
   margin: 0 0 20px;
