@@ -15,6 +15,11 @@
   --muted: #6b6b70;
   --muted-2: #808086;
   --line: rgba(15, 14, 14, 0.12);
+
+  /* accent: dusty rose (white text on --accent is 4.8:1) */
+  --accent: #b84e6c;
+  --accent-soft: #f6dde4;
+  --accent-tint: #fbeef1;
 }
 
 * { box-sizing: border-box; }
@@ -78,9 +83,9 @@ a { color: inherit; text-decoration: none; }
   color: var(--fg);
 }
 
-.site-header nav a { transition: opacity 0.2s ease; }
+.site-header nav a { transition: color 0.2s ease; }
 
-.site-header nav a:hover { opacity: 0.5; }
+.site-header nav a:hover { color: var(--accent); }
 
 .site-header .year {
   justify-self: end;
@@ -129,7 +134,7 @@ a { color: inherit; text-decoration: none; }
   font-size: clamp(13px, 1.15vw, 16px);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--fg);
+  color: var(--accent);
   max-width: 900px;
 }
 
@@ -137,8 +142,7 @@ a { color: inherit; text-decoration: none; }
   display: block;
   margin-top: 24px;
   width: 30px;
-  color: var(--fg);
-  opacity: 0.85;
+  color: var(--accent);
   animation: arrow-nudge 2.2s ease-in-out infinite;
 }
 
@@ -204,7 +208,7 @@ a { color: inherit; text-decoration: none; }
 .c-frame {
   --m: calc(var(--cw) * 0.03);
   --l: 9px;
-  --c: rgba(15, 14, 14, 0.75);
+  --c: var(--accent);
   position: absolute;
   left: 50%;
   top: calc(var(--top) + var(--cw) * 0.375);
@@ -248,7 +252,7 @@ a { color: inherit; text-decoration: none; }
 .c-item.no-anim img.col { transition: none; }
 
 .c-item:focus-visible {
-  outline: 2px solid var(--fg);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -282,7 +286,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted-2);
+  color: var(--accent);
 }
 
 /* ---------- Work grid ---------- */
@@ -326,22 +330,28 @@ a { color: inherit; text-decoration: none; }
   margin-top: 18px;
   padding-bottom: 18px;
   border-bottom: 1px solid var(--line);
+  transition: border-color 0.3s ease;
 }
 
 .work-card .meta h3 {
   margin: 0;
   font-size: 19px;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .work-card .meta span {
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted-2);
+  color: var(--accent);
   white-space: nowrap;
   margin-left: 16px;
 }
+
+.work-card:hover .meta { border-bottom-color: var(--accent); }
+
+.work-card:hover .meta h3 { color: var(--accent); }
 
 /* ---------- About ---------- */
 
@@ -407,7 +417,7 @@ a { color: inherit; text-decoration: none; }
 
 .services-list:hover li { color: rgba(15, 14, 14, 0.22); }
 
-.services-list:hover li:hover { color: var(--fg); }
+.services-list:hover li:hover { color: var(--accent); }
 
 .services-list li:last-child { border-bottom: 1px solid var(--line); }
 
@@ -415,6 +425,8 @@ a { color: inherit; text-decoration: none; }
 
 .contact-section {
   text-align: center;
+  background: var(--accent-soft);
+  border-top: 0;
 }
 
 .contact-section h2 {
@@ -433,8 +445,8 @@ a { color: inherit; text-decoration: none; }
   height: 48px;
   padding: 0 30px;
   border-radius: 999px;
-  background: var(--fg);
-  color: var(--bg);
+  background: var(--accent);
+  color: #fff;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -442,9 +454,14 @@ a { color: inherit; text-decoration: none; }
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.btn:hover { background: var(--muted); }
+.btn:hover { background: var(--fg); }
 
-::selection { background: var(--fg); color: var(--bg); }
+::selection { background: var(--accent-soft); color: var(--fg); }
+
+.kw {
+  color: var(--accent);
+  font-weight: 500;
+}
 
 footer {
   padding: 40px 0;
@@ -481,7 +498,7 @@ footer {
 .footer-social { transition: color 0.2s ease; }
 
 .footer-mail:hover,
-.footer-social:hover { color: var(--fg); }
+.footer-social:hover { color: var(--accent); }
 
 /* ---------- Project pages ---------- */
 
@@ -493,7 +510,7 @@ footer {
   letter-spacing: 0.04em;
 }
 
-.back-link:hover { color: var(--fg); }
+.back-link:hover { color: var(--accent); }
 
 .project-header { margin-bottom: 48px; }
 
