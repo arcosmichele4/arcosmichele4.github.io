@@ -16,10 +16,13 @@
   --muted-2: #808086;
   --line: rgba(15, 14, 14, 0.12);
 
-  /* accent: dusty rose (white text on --accent is 4.8:1) */
-  --accent: #b84e6c;
-  --accent-soft: #f6dde4;
-  --accent-tint: #fbeef1;
+  /* accent: periwinkle blue (same hue as the reference #b9d0fa)
+     --accent      text on white / buttons / arrows (white on it is 4.8:1)
+     --accent-zone big blue areas that carry white headings (3.1:1, large text)
+     --accent-pale the exact reference blue, for text-free fills */
+  --accent: #2c6ddd;
+  --accent-zone: #5f8ff5;
+  --accent-pale: #b9d0fa;
 }
 
 * { box-sizing: border-box; }
@@ -425,7 +428,8 @@ a { color: inherit; text-decoration: none; }
 
 .contact-section {
   text-align: center;
-  background: var(--accent-soft);
+  background: var(--accent-zone);
+  color: #fff;
   border-top: 0;
 }
 
@@ -456,7 +460,12 @@ a { color: inherit; text-decoration: none; }
 
 .btn:hover { background: var(--fg); }
 
-::selection { background: var(--accent-soft); color: var(--fg); }
+/* on the blue zone the button is white, so its label never sits on blue */
+.contact-section .btn { background: #fff; color: var(--accent); }
+
+.contact-section .btn:hover { background: var(--fg); color: #fff; }
+
+::selection { background: var(--accent-pale); color: var(--fg); }
 
 .kw {
   color: var(--accent);
