@@ -18,10 +18,10 @@
 
   /* accent: periwinkle blue (same hue as the reference #b9d0fa)
      --accent      text on white / buttons / arrows (white on it is 4.8:1)
-     --accent-zone big blue areas that carry white headings (3.1:1, large text)
+     --accent-zone big blue areas (About, Contact) that carry white text (3.6:1)
      --accent-pale the exact reference blue, for text-free fills */
   --accent: #2c6ddd;
-  --accent-zone: #5f8ff5;
+  --accent-zone: #4f84f3;
   --accent-pale: #b9d0fa;
 }
 
@@ -388,9 +388,33 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.5;
 }
 
+/* the About block sits on the blue zone: all its text is white */
+
+.about-section {
+  background: var(--accent-zone);
+  color: #fff;
+  border-top: 0;
+}
+
+.about-section .about-text p {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.about-section .about-text p.about-lead { font-size: clamp(19px, 2vw, 25px); }
+
+.about-section .kw {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
 /* ---------- Services ---------- */
 
-.services { margin-top: 110px; }
+.services-section { border-top: 0; }
 
 .services-title {
   margin: 0 0 14px;
@@ -598,7 +622,6 @@ footer {
   .site-header { display: flex; justify-content: space-between; padding: 20px; }
   .site-header nav { display: none; }
   .work-grid { grid-template-columns: 1fr; }
-  .services { margin-top: 72px; }
   .section { padding: 80px 0; }
   footer { flex-direction: column; gap: 10px; text-align: center; }
 }
