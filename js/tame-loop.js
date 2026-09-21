@@ -28,7 +28,7 @@
       lines: [[0.7, 'cream', 0], [0.5, 'cream', 0]] }
   ];
 
-  var HOLD = 1.1, MORPH = 0.9;               // seconds per design
+  var HOLD = 0.7, MORPH = 0.6;               // seconds per design
   var SW = 1417, SH = 872, R0 = 357;         // the flat designs: size and radius of the outer circle
 
   function hex(c) {
