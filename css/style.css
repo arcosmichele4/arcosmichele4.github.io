@@ -593,6 +593,14 @@ footer {
   height: 100%;
 }
 
+/* a column of stacked images (used next to a big one) */
+
+.project-images .stack {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
 /* big work next to a 2 x 3 grid of small ones */
 
 .project-images .collage > img {

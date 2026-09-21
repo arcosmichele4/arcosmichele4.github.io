@@ -47,9 +47,10 @@
     var W = 0, H = 0, dpr = 1, raf = 0, visible = false, t0 = 0, tPause = 0;
 
     function size() {
+      // the box can have any proportion: the design stays centered and the background fills the rest
       var w = canvas.clientWidth || 1;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = w; H = w * SH / SW;
+      W = w; H = canvas.clientHeight || w * SH / SW;
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
       draw(current);
@@ -65,7 +66,7 @@
 
     function draw(t) {
       var s = state(t), a = s.a, b = s.b, k = s.k;
-      var u = W / SW, R = R0 * u, cx = W / 2, cy = H / 2, i;
+      var u = Math.min(W / SW, H / SH), R = R0 * u, cx = W / 2, cy = H / 2, i;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
       ctx.fillStyle = mix(a.bg, b.bg, k);
