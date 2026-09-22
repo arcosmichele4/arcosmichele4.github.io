@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png?v=4">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=61">
+<link rel="stylesheet" href="css/style.css?v=62">
 <script>
 /* the entrance animation plays once per visit: hide the page until it starts */
 try {
@@ -46,32 +46,32 @@ try {
 
 <section class="section" id="work">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <h2>Selected work</h2>
       <span class="section-tag">06 Projects</span>
     </div>
-    <div class="work-grid">
-      <a class="work-card" href="espacio-emocional.html">
+    <div class="work-grid reveal-group">
+      <a class="work-card reveal" href="espacio-emocional.html">
         <div class="thumb"><img class="bw" src="images/covers/espacio-emocional-bw.jpg?v=4" alt="Espacio Emocional"><img class="col" src="images/covers/espacio-emocional.jpg" alt=""></div>
         <div class="meta"><h3>Espacio Emocional</h3><span>Editorial &amp; research</span></div>
       </a>
-      <a class="work-card" href="sol-sal.html">
+      <a class="work-card reveal" href="sol-sal.html">
         <div class="thumb"><img class="bw" src="images/covers/sol-sal-bw.jpg?v=4" alt="SOL &amp; SAL"><img class="col" src="images/covers/sol-sal.jpg" alt=""></div>
         <div class="meta"><h3>SOL &amp; SAL</h3><span>Brand identity</span></div>
       </a>
-      <a class="work-card" href="xoko.html">
+      <a class="work-card reveal" href="xoko.html">
         <div class="thumb"><img class="bw" src="images/covers/xoko-bw.jpg?v=4" alt="XOKO"><img class="col" src="images/covers/xoko.jpg" alt=""></div>
         <div class="meta"><h3>XOKO</h3><span>Packaging</span></div>
       </a>
-      <a class="work-card" href="madma.html">
+      <a class="work-card reveal" href="madma.html">
         <div class="thumb"><img class="bw" src="images/covers/madma-bw.jpg?v=4" alt="MADMA"><img class="col" src="images/covers/madma.jpg" alt=""></div>
         <div class="meta"><h3>MADMA</h3><span>Brand identity</span></div>
       </a>
-      <a class="work-card" href="san-isidro.html">
+      <a class="work-card reveal" href="san-isidro.html">
         <div class="thumb"><img class="bw" src="images/covers/san-isidro-bw.jpg?v=4" alt="San Isidro 2025" style="object-position: 50% 40%"><img class="col" src="images/covers/san-isidro.jpg" alt="" style="object-position: 50% 40%"></div>
         <div class="meta"><h3>San Isidro 2025</h3><span>Poster design</span></div>
       </a>
-      <a class="work-card" href="tame-impala.html">
+      <a class="work-card reveal" href="tame-impala.html">
         <div class="thumb"><img class="bw" src="images/covers/tame-impala-bw.jpg?v=1" alt="Tame Impala"><img class="col" src="images/covers/tame-impala.jpg" alt=""></div>
         <div class="meta"><h3>Tame Impala</h3><span>Album design</span></div>
       </a>
@@ -82,7 +82,7 @@ try {
 <section class="section" id="about">
   <div class="wrap">
     <div class="about-top">
-      <div class="about-text">
+      <div class="about-text reveal">
         <h2>Hi, I&#180;m Michele</h2>
         <p class="about-lead">a graphic designer passionate about creating meaningful visual identities.</p>
         <p>I&rsquo;m interested in branding, visual identity, packaging, advertising and corporate design. I enjoy creating simple, thoughtful and visually coherent designs, while also exploring new ideas and experimenting with different approaches.</p>
@@ -92,7 +92,7 @@ try {
       </div>
     </div>
 
-    <div class="services">
+    <div class="services reveal">
       <p class="services-title">Services</p>
       <ul class="services-list">
         <li>Branding</li>
@@ -106,9 +106,9 @@ try {
 </section>
 
 <section class="section contact-section" id="contact">
-  <div class="wrap">
-    <h2>Something<br>in mind?</h2>
-    <a class="btn" href="mailto:arcosmichele4@gmail.com">Let&rsquo;s talk</a>
+  <div class="wrap reveal-group">
+    <h2 class="reveal">Something<br>in mind?</h2>
+    <a class="btn reveal" href="mailto:arcosmichele4@gmail.com">Let&rsquo;s talk</a>
   </div>
 </section>
 
@@ -125,6 +125,7 @@ try {
 <script>
 document.getElementById('headerYear').textContent = new Date().getFullYear();
 </script>
+<script src="js/reveal.js?v=1"></script>
 
 <script>
 /* Entrance animation: the name fades in letter by letter (black on white), then the

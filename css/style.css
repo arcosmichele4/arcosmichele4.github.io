@@ -623,6 +623,28 @@ footer {
   .project-images .collage > img { height: auto; aspect-ratio: var(--ar); }
 }
 
+/* ---------- Scroll reveal ---------- */
+
+/* elements fade up into place as they enter the viewport (see js/reveal.js);
+   --rd staggers items inside a .reveal-group, set per item by the script */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 0.8, 0.24, 1), transform 0.8s cubic-bezier(0.16, 0.8, 0.24, 1);
+  transition-delay: var(--rd, 0s);
+  will-change: opacity, transform;
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 860px) {
