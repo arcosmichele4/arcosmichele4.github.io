@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png?v=4">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=63">
+<link rel="stylesheet" href="css/style.css?v=64">
 <script>
 /* the entrance animation plays once per visit: hide the page until it starts */
 try {
@@ -327,14 +327,16 @@ document.getElementById('headerYear').textContent = new Date().getFullYear();
     { href: 'tame-impala.html', src: 'images/covers/tame-impala.jpg', bw: 'images/covers/tame-impala-bw.jpg?v=1', title: 'Tame Impala', pos: '50% 50%' }
   ];
   var N = DATA.length;
-  var RANGE = 9, SLOTS = RANGE * 2 + 1;
-  // side works sit next to each other (no overlap), shrinking and fading toward the edges
-  var GAP_C = 0.055, GAP = 0.025;
-  var S = [1, 0.5], X = [0, 0], O = [1, 1, 0.92, 0.78, 0.6, 0.44, 0.3, 0.2, 0.1, 0];
-  X[1] = 0.5 + GAP_C + S[1] / 2;
-  for (var q = 2; q <= RANGE; q++) {
-    S[q] = S[q - 1] * 0.79;
-    X[q] = X[q - 1] + S[q - 1] / 2 + GAP + S[q] / 2;
+  var RANGE = 6, SLOTS = RANGE * 2 + 1;
+  // a flat row: the center work is a little bigger, every side work shares the
+  // same size (no perspective shrink) and stays fully opaque, like a strip of film
+  var GAP_C = 0.05, GAP = 0.04;
+  var SIDE_S = 0.62;
+  var S = [1], X = [0], O = [1];
+  for (var q = 1; q <= RANGE; q++) {
+    S[q] = SIDE_S;
+    O[q] = 1;
+    X[q] = X[q - 1] + S[q - 1] / 2 + (q === 1 ? GAP_C : GAP) + S[q] / 2;
   }
   var AUTOPLAY_MS = 2100;
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;

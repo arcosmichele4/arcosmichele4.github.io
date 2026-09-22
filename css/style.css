@@ -175,12 +175,13 @@ body.intro-lock { overflow: hidden; }
 /* ---------- Carousel (3D scale) ---------- */
 
 .carousel {
-  --cw: clamp(280px, min(58vw, 64vh), 800px);
-  --cw: clamp(280px, min(58vw, 64vh, (100vh - 268px - var(--hfs)) / 0.75), 800px);
-  --top: 26px;
+  /* a flat, wide band rather than one tall centered image: the center card
+     stays modest in size so the row reads as horizontal, not vertical */
+  --cw: clamp(200px, min(26vw, 28vh, (100vh - 300px - var(--hfs)) / 0.75), 340px);
+  --top: 20px;
   position: relative;
   width: 100%;
-  height: calc(var(--cw) * 0.75 + 52px);
+  height: calc(var(--cw) * 0.75 + 40px);
   margin-top: 0;
   overflow: hidden;
   touch-action: pan-y;
