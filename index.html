@@ -327,16 +327,15 @@ document.getElementById('headerYear').textContent = new Date().getFullYear();
     { href: 'tame-impala.html', src: 'images/covers/tame-impala.jpg', bw: 'images/covers/tame-impala-bw.jpg?v=1', title: 'Tame Impala', pos: '50% 50%' }
   ];
   var N = DATA.length;
-  var RANGE = 6, SLOTS = RANGE * 2 + 1;
-  // a flat row: the center work is a little bigger, every side work shares the
-  // same size (no perspective shrink) and stays fully opaque, like a strip of film
-  var GAP_C = 0.05, GAP = 0.04;
-  var SIDE_S = 0.62;
+  var RANGE = 5, SLOTS = RANGE * 2 + 1;
+  // a flat filmstrip: every work is exactly the same size, fully opaque; only
+  // the centered one switches from black & white to color
+  var GAP = 0.04;
   var S = [1], X = [0], O = [1];
   for (var q = 1; q <= RANGE; q++) {
-    S[q] = SIDE_S;
+    S[q] = 1;
     O[q] = 1;
-    X[q] = X[q - 1] + S[q - 1] / 2 + (q === 1 ? GAP_C : GAP) + S[q] / 2;
+    X[q] = X[q - 1] + S[q - 1] / 2 + GAP + S[q] / 2;
   }
   var AUTOPLAY_MS = 2100;
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
