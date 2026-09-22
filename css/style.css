@@ -175,9 +175,9 @@ body.intro-lock { overflow: hidden; }
 /* ---------- Carousel (3D scale) ---------- */
 
 .carousel {
-  /* a flat, wide band rather than one tall centered image: the center card
-     stays modest in size so the row reads as horizontal, not vertical */
-  --cw: clamp(200px, min(26vw, 28vh, (100vh - 300px - var(--hfs)) / 0.75), 340px);
+  /* a flat, wide band rather than one tall centered image: every card is the
+     same size (flat, not a 3D perspective falloff), just bigger than before */
+  --cw: clamp(300px, min(38vw, 40vh, (100vh - 260px - var(--hfs)) / 0.75), 620px);
   --top: 20px;
   position: relative;
   width: 100%;
