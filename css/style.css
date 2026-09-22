@@ -177,7 +177,7 @@ body.intro-lock { overflow: hidden; }
 .carousel {
   /* a flat, wide band rather than one tall centered image: every card is the
      same size (flat, not a 3D perspective falloff), just bigger than before */
-  --cw: clamp(300px, min(38vw, 40vh, (100vh - 260px - var(--hfs)) / 0.75), 620px);
+  --cw: clamp(340px, min(45vw, 46vh, (100vh - 230px - var(--hfs)) / 0.75), 720px);
   --top: 20px;
   position: relative;
   width: 100%;
