@@ -214,35 +214,6 @@ body.intro-lock { overflow: hidden; }
 
 .c-item.no-anim { transition: none; }
 
-/* corner marks + labels around the centered work */
-
-.c-frame {
-  --m: calc(var(--cw) * 0.03);
-  --l: 9px;
-  --c: rgba(15, 14, 14, 0.75);
-  position: absolute;
-  left: 50%;
-  top: calc(var(--top) + var(--cw) * 0.375);
-  width: calc(var(--cw) + var(--m) * 2);
-  height: calc(var(--cw) * 0.75 + var(--m) * 2);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 30;
-  background:
-    linear-gradient(var(--c), var(--c)) top left / var(--l) 1px,
-    linear-gradient(var(--c), var(--c)) top left / 1px var(--l),
-    linear-gradient(var(--c), var(--c)) top right / var(--l) 1px,
-    linear-gradient(var(--c), var(--c)) top right / 1px var(--l),
-    linear-gradient(var(--c), var(--c)) bottom left / var(--l) 1px,
-    linear-gradient(var(--c), var(--c)) bottom left / 1px var(--l),
-    linear-gradient(var(--c), var(--c)) bottom right / var(--l) 1px,
-    linear-gradient(var(--c), var(--c)) bottom right / 1px var(--l);
-  background-repeat: no-repeat;
-}
-
-
-
-
 .c-item img {
   position: absolute;
   inset: 0;
