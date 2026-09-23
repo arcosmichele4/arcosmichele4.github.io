@@ -594,6 +594,49 @@ footer {
   .project-images .collage > img { height: auto; aspect-ratio: var(--ar); }
 }
 
+/* ---------- Case study (process write-up on UX projects) ---------- */
+
+.case-study {
+  max-width: 720px;
+  margin: 0 0 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.case-study h2 {
+  margin: 0 0 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.case-study p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.case-study .block p + p { margin-top: 14px; }
+
+.case-study blockquote {
+  margin: 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--line);
+  font-style: italic;
+  color: var(--fg);
+}
+
+.case-study .case-credit {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--muted-2);
+}
+
 /* ---------- Scroll reveal ---------- */
 
 /* elements fade up into place as they enter the viewport (see js/reveal.js);
