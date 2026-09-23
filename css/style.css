@@ -594,6 +594,98 @@ footer {
   .project-images .collage > img { height: auto; aspect-ratio: var(--ar); }
 }
 
+/* ---------- Case study (process write-up on UX projects) ---------- */
+
+.case-study {
+  max-width: 720px;
+  margin: 0 0 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.case-study h2 {
+  margin: 0 0 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.case-study p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.case-study .block p + p { margin-top: 14px; }
+
+.case-study .case-credit {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--muted-2);
+}
+
+/* ---------- Browser-frame screenshot grid (UX / product projects) ---------- */
+
+.screens-grid {
+  columns: 3 300px;
+  column-gap: 24px;
+  padding-bottom: 100px;
+}
+
+.browser-mock {
+  margin: 0 0 28px;
+  break-inside: avoid;
+}
+
+.browser-mock .frame {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  background: var(--soft);
+  border-bottom: 1px solid var(--line);
+}
+
+.browser-bar span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(15, 14, 14, 0.18);
+}
+
+.browser-mock img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.browser-mock figcaption {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+@media (max-width: 700px) {
+  .screens-grid { columns: 1; }
+}
+
 /* ---------- Scroll reveal ---------- */
 
 /* elements fade up into place as they enter the viewport (see js/reveal.js);
