@@ -399,12 +399,11 @@ body.intro-lock { overflow: hidden; }
   line-height: 1.1;
   letter-spacing: -0.02em;
   text-transform: uppercase;
+  color: rgba(15, 14, 14, 0.22);
   transition: color 0.3s ease;
 }
 
-.services-list:hover li { color: rgba(15, 14, 14, 0.22); }
-
-.services-list:hover li:hover { color: var(--fg); }
+.services-list li:hover { color: var(--fg); }
 
 .services-list li:last-child { border-bottom: 1px solid var(--line); }
 
