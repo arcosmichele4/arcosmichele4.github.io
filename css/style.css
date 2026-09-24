@@ -594,6 +594,48 @@ footer {
   .project-images .collage > img { height: auto; aspect-ratio: var(--ar); }
 }
 
+/* mascots (Livvi): one waves from the header, others stand on top of an image */
+
+.project-header { position: relative; }
+
+.header-mascot {
+  position: absolute;
+  right: 0;
+  top: -6px;
+  height: clamp(120px, 15vw, 190px);
+  width: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.project-images .row.has-mascot {
+  position: relative;
+  margin-top: clamp(112px, calc(11vw + 12px), 170px);
+}
+
+.project-images .mascot {
+  position: absolute;
+  flex: none;
+  width: auto;
+  height: clamp(92px, 11vw, 150px);
+  aspect-ratio: auto;
+  object-fit: contain;
+  border-radius: 0;
+  bottom: calc(100% - 8px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.project-images .mascot.right { right: 7%; }
+.project-images .mascot.left { left: 7%; }
+
+@media (max-width: 600px) {
+  .header-mascot { height: 92px; top: -4px; }
+  .project-images .row.has-mascot { margin-top: 108px; }
+  .project-images .mascot { height: 88px; }
+  .project-images .row > .mascot { width: auto; }
+}
+
 /* ---------- Case study (process write-up on UX projects) ---------- */
 
 .case-study {
