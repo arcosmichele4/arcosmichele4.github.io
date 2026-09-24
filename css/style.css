@@ -635,6 +635,11 @@ footer {
   animation: mascot-wave 3.4s ease-in-out infinite;
 }
 
+/* on wide screens there is plenty of room beside the text, so it can hang lower on the page */
+@media (min-width: 1200px) {
+  .header-mascot { translate: 0 130px; }
+}
+
 @keyframes mascot-wave {
   0%, 50%, 100% { transform: rotate(0deg); }
   7% { transform: rotate(-18deg); }
