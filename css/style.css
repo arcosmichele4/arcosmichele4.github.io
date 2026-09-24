@@ -600,13 +600,16 @@ footer {
 
 .header-mascot {
   position: absolute;
-  right: 0;
-  top: -6px;
-  height: clamp(120px, 15vw, 190px);
+  right: 2%;
+  top: -14px;
+  height: clamp(96px, calc(100vw - 800px), 380px);
   width: auto;
   pointer-events: none;
   user-select: none;
 }
+
+/* mirror a mascot so it faces the content */
+.flip { transform: scaleX(-1); }
 
 .project-images .row.has-mascot {
   position: relative;
@@ -630,7 +633,7 @@ footer {
 .project-images .mascot.left { left: 7%; }
 
 @media (max-width: 600px) {
-  .header-mascot { height: 92px; top: -4px; }
+  .header-mascot { height: 92px; top: -4px; right: 0; }
   .project-images .row.has-mascot { margin-top: 108px; }
   .project-images .mascot { height: 88px; }
   .project-images .row > .mascot { width: auto; }
