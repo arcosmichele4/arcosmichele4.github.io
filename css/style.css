@@ -741,10 +741,10 @@ footer {
 .chat-mascot {
   position: absolute;
   flex: none;
-  right: 2%;
-  bottom: calc(100% - 10px);
+  right: 0;
+  bottom: calc(100% - 5px);
   height: var(--mh, 150px);
-  aspect-ratio: 602 / 577;
+  aspect-ratio: 486 / 451;
   pointer-events: none;
   user-select: none;
 }
@@ -768,7 +768,6 @@ footer {
     --mh: clamp(300px, 27vw, 380px);
     margin-top: 0;
   }
-  .chat-mascot { right: 0; }
 }
 
 .cm-dot {
