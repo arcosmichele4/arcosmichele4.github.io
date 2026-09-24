@@ -624,12 +624,13 @@ footer {
   user-select: none;
 }
 
+/* the two shoes end a few pixels apart, so the line starts slightly above the lower shoe's sole: both feet rest on it */
 .header-line {
   position: absolute;
-  top: calc(100% - 2px);
+  top: calc(100% - var(--hm) * 0.013);
   left: -24%;
   right: calc(-1 * var(--bleed));
-  height: max(5px, calc(var(--hm) * 0.03));
+  height: max(6px, calc(var(--hm) * 0.042));
   background: #6c5ce7;
   border-radius: 999px 0 0 999px;
 }
