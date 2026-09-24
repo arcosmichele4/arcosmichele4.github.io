@@ -598,27 +598,49 @@ footer {
 
 /* a project header that carries a mascot: text on the left, mascot in its own column
    (in the normal flow, so it can never run off the edge of the screen) */
-.project-header:has(.header-mascot) {
+.project-header:has(.header-figure) {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   column-gap: 48px;
   align-items: center;
 }
 
-.project-header:has(.header-mascot) > :not(.header-mascot) { grid-column: 1; }
+.project-header:has(.header-figure) > :not(.header-figure) { grid-column: 1; }
 
-.header-mascot {
+/* the mascot stands on a purple line that runs out to the right edge of the page */
+.header-figure {
+  --hm: clamp(130px, 20vw, 280px);
+  --bleed: calc(max(0px, (100vw - 1280px) / 2) + 56px);
   grid-column: 2;
   grid-row: 1 / span 3;
   justify-self: end;
   position: relative;
   display: block;
   aspect-ratio: 485 / 560;
-  height: clamp(130px, 20vw, 280px);
+  height: var(--hm);
   max-width: 100%;
   translate: 0 44px;
   pointer-events: none;
   user-select: none;
+}
+
+.header-line {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: -24%;
+  right: calc(-1 * var(--bleed));
+  height: max(5px, calc(var(--hm) * 0.03));
+  background: #6c5ce7;
+  border-radius: 999px 0 0 999px;
+}
+
+/* the line runs past the content column to the window edge: never let it add a horizontal scrollbar */
+html:has(.header-line) { overflow-x: clip; }
+
+.header-mascot {
+  position: absolute;
+  inset: 0;
+  display: block;
 }
 
 .header-mascot img {
@@ -637,7 +659,7 @@ footer {
 
 /* on wide screens there is plenty of room beside the text, so it can hang lower on the page */
 @media (min-width: 1200px) {
-  .header-mascot { translate: 0 130px; }
+  .header-figure { translate: 0 130px; }
 }
 
 @keyframes mascot-wave {
@@ -678,10 +700,14 @@ footer {
 .project-images .mascot.right { right: 7%; }
 .project-images .mascot.left { left: 7%; }
 
+@media (max-width: 860px) {
+  .header-figure { --bleed: calc(max(0px, (100vw - 1280px) / 2) + 24px); }
+}
+
 @media (max-width: 600px) {
-  .project-header:has(.header-mascot) { grid-template-columns: 1fr; }
-  .project-header:has(.header-mascot) > :not(.header-mascot) { grid-column: 1; }
-  .header-mascot { grid-column: 1; grid-row: auto; order: -1; justify-self: end; height: 96px; margin-bottom: 4px; translate: none; }
+  .project-header:has(.header-figure) { grid-template-columns: 1fr; }
+  .project-header:has(.header-figure) > :not(.header-figure) { grid-column: 1; }
+  .header-figure { grid-column: 1; grid-row: auto; order: -1; justify-self: end; --hm: 96px; margin-bottom: 14px; translate: none; }
   .project-images .row.has-mascot { margin-top: 108px; }
   .project-images .mascot { height: 88px; }
   .project-images .row > .mascot { width: auto; }
