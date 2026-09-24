@@ -880,3 +880,38 @@ html:has(.header-line) { overflow-x: clip; }
   .project-images .row.wires { flex-direction: row; flex-wrap: wrap; }
   .project-images .row.wires > * { flex: none; width: calc(50% - 4px); }
 }
+
+/* XOKO film: footage with the logo fading in over the end */
+
+.project-images .film {
+  position: relative;
+  aspect-ratio: var(--ar);
+  overflow: hidden;
+  border-radius: 2px;
+  background: #1a0f0a;
+}
+
+.project-images .film video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-images .film-end {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  pointer-events: none;
+}
+
+.project-images .film-end img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.project-images .film.show-logo .film-end { opacity: 1; }

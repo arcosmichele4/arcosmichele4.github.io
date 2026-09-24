@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png?v=4">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=83">
+<link rel="stylesheet" href="css/style.css?v=84">
 </head>
 <body>
 
@@ -36,6 +36,14 @@
       <img src="images/xoko/cover.jpg" alt="XOKO" width="3840" height="2560" style="--ar:1.5">
     </div>
     <div class="row reveal">
+      <div class="film" data-film style="--ar:1.7778">
+        <video muted playsinline loop preload="metadata" aria-label="Chocolate being poured, then the XOKO logo">
+          <source src="images/xoko/chocolate.mp4" type="video/mp4">
+        </video>
+        <div class="film-end" aria-hidden="true"><img src="images/xoko/logo.png" alt="" width="2000" height="1125"></div>
+      </div>
+    </div>
+    <div class="row reveal">
       <img src="images/xoko/1.jpg" alt="XOKO" width="1920" height="1279" style="--ar:1.5012">
     </div>
     <div class="row reveal">
@@ -56,6 +64,7 @@ var year = new Date().getFullYear();
 document.getElementById('headerYear').textContent = year;
 </script>
 
+<script src="js/film.js?v=1"></script>
 <script src="js/reveal.js?v=1"></script>
 </body>
 </html>
