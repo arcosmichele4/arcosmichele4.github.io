@@ -734,7 +734,7 @@ footer {
 /* the armchair mascot leans on the first image and chats: only the typing dots move, appearing in order */
 
 .project-images .row.has-mascot.big {
-  --mh: clamp(150px, 22vw, 230px);
+  --mh: clamp(130px, 20vw, 280px);
   margin-top: calc(var(--mh) + 12px);
 }
 
@@ -762,10 +762,14 @@ footer {
   object-fit: contain;
 }
 
+@media (max-width: 600px) {
+  .project-images .row.has-mascot.big { --mh: 96px; }
+}
+
 /* wide screens: the mascot rises beside the text column, so no extra gap is needed above the image */
 @media (min-width: 1240px) {
   .project-images .row.has-mascot.big {
-    --mh: clamp(300px, 27vw, 380px);
+    --mh: clamp(130px, 20vw, 280px);
     margin-top: 0;
   }
 }
