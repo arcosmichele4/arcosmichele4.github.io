@@ -596,14 +596,24 @@ footer {
 
 /* mascots (Livvi): one waves from the header, others stand on top of an image */
 
-.project-header { position: relative; }
+/* a project header that carries a mascot: text on the left, mascot in its own column
+   (in the normal flow, so it can never run off the edge of the screen) */
+.project-header:has(.header-mascot) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 48px;
+  align-items: center;
+}
+
+.project-header:has(.header-mascot) > :not(.header-mascot) { grid-column: 1; }
 
 .header-mascot {
-  position: absolute;
-  right: 2%;
-  top: -14px;
-  height: clamp(96px, calc(100vw - 800px), 380px);
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  justify-self: end;
+  height: clamp(130px, 20vw, 280px);
   width: auto;
+  max-width: 100%;
   pointer-events: none;
   user-select: none;
 }
@@ -633,7 +643,9 @@ footer {
 .project-images .mascot.left { left: 7%; }
 
 @media (max-width: 600px) {
-  .header-mascot { height: 92px; top: -4px; right: 0; }
+  .project-header:has(.header-mascot) { grid-template-columns: 1fr; }
+  .project-header:has(.header-mascot) > :not(.header-mascot) { grid-column: 1; }
+  .header-mascot { grid-column: 1; grid-row: auto; order: -1; justify-self: end; height: 96px; margin-bottom: 4px; }
   .project-images .row.has-mascot { margin-top: 108px; }
   .project-images .mascot { height: 88px; }
   .project-images .row > .mascot { width: auto; }
