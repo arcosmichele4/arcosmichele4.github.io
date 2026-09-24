@@ -1,17 +1,23 @@
-/* XOKO film: real chocolate footage plays while in view, and the logo fades in over its last seconds */
+/* XOKO film: a short loop of real chocolate footage while in view, with the logo fading in over its last seconds */
 (function () {
   var film = document.querySelector('[data-film]');
   if (!film) return;
   var video = film.querySelector('video');
-  var LOGO_SECONDS = 3;
+  var START = 0.5;        // the clip is a long, repetitive shot: only this window is played
+  var END = 6.5;
+  var LOGO_SECONDS = 2;
+  var raf = 0;
 
-  function sync() {
-    var d = video.duration;
-    if (d && video.currentTime > d - LOGO_SECONDS) film.classList.add('show-logo');
+  function frame() {
+    if (video.currentTime >= END || video.currentTime < START - 0.05) video.currentTime = START;
+    if (video.currentTime > END - LOGO_SECONDS) film.classList.add('show-logo');
     else film.classList.remove('show-logo');
+    raf = video.paused ? 0 : requestAnimationFrame(frame);
   }
-  video.addEventListener('timeupdate', sync);
-  video.addEventListener('seeked', sync);
+  video.addEventListener('play', function () { if (!raf) raf = requestAnimationFrame(frame); });
+  video.addEventListener('seeked', frame);
+  function cue() { if (video.currentTime < START) video.currentTime = START; }
+  if (video.readyState >= 1) cue(); else video.addEventListener('loadedmetadata', cue);
 
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     video.controls = true;
